@@ -1,0 +1,12 @@
+minio:
+  endpoint: 159.75.23.131
+  port: 8082
+  accessKey: nichtLopmiK8H#lop
+  secretKey: 909374#ni8c#hT
+  secure: false
+  bucketName: test
+  name: minio
+spring:
+  config:
+    activate:
+      on-profile: minio
