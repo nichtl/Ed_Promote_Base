@@ -7,7 +7,7 @@ package com.nicht.promote.multithreading.chapter.Chapter;
  * @Link http://ifeve.com/semaphore/
  */
 public class semaphore {
-     /*菊花 chrysanthemum*/
+     /* chrysanthemum*/
     /**Semaphore（信号量） 是一个线程同步结构，用于在线程间传递信号，
      * 以避免出现信号丢失（译者注：下文会具体介绍），
      * 或者像锁一样用于保护一个关键区域。
