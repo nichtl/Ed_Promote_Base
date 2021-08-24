@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "minio.endpoint",
+      "type": "java.lang.String",
+      "description": "Description for minio.endpoint."
+    },
+    {
+      "name": "minio.endpoint",
+      "type": "java.lang.String",
+      "description": "Description for minio.endpoint."
+    },
+    {
+      "name": "minio.secure",
+      "type": "java.lang.String",
+      "description": "Description for minio.secure."
+    },
+    {
+      "name": "minio.name",
+      "type": "java.lang.String",
+      "description": "Description for minio.name."
+    }
+  ] }
