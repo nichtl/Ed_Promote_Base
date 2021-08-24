@@ -10,6 +10,6 @@ import com.learn_netty_one.SimapleChat.Client.SimpleChatClient;
 public class ChatTest {
 
     public static void main(String[] args) throws  Exception {
-        new SimpleChatClient("127.0.0.1", 8080).run();
+        new SimpleChatClient("127.0.0.1", 8082).run();
     }
 }
