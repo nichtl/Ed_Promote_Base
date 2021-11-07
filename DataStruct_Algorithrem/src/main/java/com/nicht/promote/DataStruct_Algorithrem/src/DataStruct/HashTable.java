@@ -1,6 +1,6 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.DataStruct;
 
-import com.sun.glass.ui.Size;
+
 /**
  * @author Ni
  * @version 1.0

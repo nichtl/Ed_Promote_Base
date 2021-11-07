@@ -58,7 +58,6 @@ public class offer_12 {
         public static boolean exist(char[][] board, String word) {
         // 使用相同大小的Boolean数组记录每个位置是否被访问过
          boolean[][]  visit = new boolean[board.length][board[0].length];
-
             for (int i = 0; i < board.length-1; i++) {
                 for (int j = 0; j < board[0].length-1 ; j++) {
                   if(dfs(board,word.toCharArray(),visit,i,j,0)){
