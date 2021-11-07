@@ -127,10 +127,8 @@ class Queen8 {
             if (arr[i] == arr[n] || Math.abs(n - i) == Math.abs(arr[n] - arr[i])) {
                 return false;
             }
-
         }
         return true;
-
     }
 
 
