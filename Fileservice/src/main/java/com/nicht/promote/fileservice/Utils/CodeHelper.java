@@ -16,8 +16,6 @@ import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -1077,28 +1075,7 @@ public class CodeHelper {
 		return "";
 	}
 
-	// 链接url下载图片
-	public static void downloadPicture(String urlList, String path) throws Exception {
-		URL url = null;
-		url = new URL(urlList);
-		DataInputStream dataInputStream = new DataInputStream(url.openStream());
 
-		FileOutputStream fileOutputStream = new FileOutputStream(new File(path));
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-		byte[] buffer = new byte[1024];
-		int length;
-
-		while ((length = dataInputStream.read(buffer)) > 0) {
-			output.write(buffer, 0, length);
-		}
-		BASE64Encoder encoder = new BASE64Encoder();
-		String encode = encoder.encode(buffer);// 返回Base64编码过的字节数组字符串
-		// System.out.println(encode);
-		fileOutputStream.write(output.toByteArray());
-		dataInputStream.close();
-		fileOutputStream.close();
-	}
 
 	/**
 	 * 根据yyyy-MM-dd获取定位表名
@@ -1125,51 +1102,7 @@ public class CodeHelper {
 
      */
 
-    public static boolean base64ChangeImage(String baseStr,String imagePath){
 
-        if (baseStr == null){
-
-            return false;
-
-        }
-
-        BASE64Decoder decoder = new BASE64Decoder();
-
-        try {
-
-            // 解密
-
-            byte[] b = decoder.decodeBuffer(baseStr);
-
-            // 处理数据
-
-            for (int i = 0; i < b.length; ++i) {
-
-                if (b[i] < 0) {
-
-                    b[i] += 256;
-
-                }
-
-            }
-
-            OutputStream out = new FileOutputStream(imagePath);
-
-            out.write(b);
-
-             out.flush();
-
-            out.close();
-
-            return true;
-
-        } catch (Exception e) {
-
-            return false;
-
-        }
-
-    }
 
 
 	public static String firstCharToLowerCase(String str) {

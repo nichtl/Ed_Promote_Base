@@ -10,7 +10,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.w3c.dom.Document;
-import sun.misc.BASE64Encoder;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -57,29 +57,6 @@ public class MyUtil {
 	public static final String ZFWDJ_STATUS_ZDZX = "ZDZX";
 
 
-	// 链接url下载图片
-		public static void downloadPicture(String urlList, String path) throws Exception {
-			URL url = null;
-			url = new URL(urlList);
-			DataInputStream dataInputStream = new DataInputStream(url.openStream());
-
-			FileOutputStream fileOutputStream = new FileOutputStream(new File(path));
-			ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-			byte[] buffer = new byte[1024];
-			int length;
-
-			while ((length = dataInputStream.read(buffer)) > 0) {
-				output.write(buffer, 0, length);
-			}
-			BASE64Encoder encoder = new BASE64Encoder();
-			String encode = encoder.encode(buffer);// 返回Base64编码过的字节数组字符串
-			// System.out.println(encode);
-			fileOutputStream.write(output.toByteArray());
-			dataInputStream.close();
-			fileOutputStream.close();
-		}
-	
 	public static String getCurrentDateHMS() {
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -93,27 +70,7 @@ public class MyUtil {
 	 * @return
 	 */
 	
-	 public static String xmlPrintFromFileName(String FileName) {
-	        String xml = "";
-	        try {
-	            DocumentBuilderFactory factory = DocumentBuilderFactory
-	                    .newInstance();
-	            DocumentBuilder builder = factory.newDocumentBuilder();
-	            Document document = builder.parse(FileName);
-	            Source oldData = new DOMSource(document);
-	            StreamResult newData = new StreamResult(new StringWriter());
-	            Transformer transformer = TransformerFactory.newInstance()
-	                    .newTransformer();
-	            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	            transformer.setOutputProperty(
-	                    "{http://xml.apache.org/xslt}indent-amount", "2");
-	            transformer.transform(oldData, newData);
-	            xml = newData.getWriter().toString();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        return xml;
-	    }
+
 	
 	
 	public static Object getFieldValueByName(String fieldName, Object o) {    
@@ -292,16 +249,7 @@ public class MyUtil {
 		return format.format(new Date());
 	}
     
-   public static synchronized String getNumber4() {
-        Random random = new Random();
-        String fourRandom = random.nextInt(10000) + "";
-        int randLength = fourRandom.length();
-        if(randLength < 4){
-            for(int i = 1;i <= 4 - randLength;i++)
-                fourRandom = "0" + fourRandom;
-        }
-        return fourRandom;
-    }
+
 
 	/**
 	 * @description 保持xml tagname与bean属性一致

@@ -6,7 +6,7 @@
         <defaultActivite>dev</defaultActivite>
         <hbactivite>hbs</hbactivite>
         <hblocation>./hbs/</hblocation>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
 
 
     </properties>
@@ -208,6 +208,12 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.6.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

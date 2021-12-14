@@ -1,10 +1,14 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode;
 
+import org.springframework.util.CollectionUtils;
+
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 /**
  * @Author Nicht
@@ -828,7 +832,7 @@ public class test {
 
     /**1436. 旅行终点站
      *
-     * @param args
+     * @param
      */
     public static String destCity(List<List<String>> paths) {
         String  res  ="";
@@ -844,9 +848,7 @@ public class test {
                res = paths.get(i).get(1);
            }
         }
-
         return  res;
-
     }
 
     /**
@@ -863,8 +865,6 @@ public class test {
     }
 
 
-
-
     /**剑指 Offer II 103. 最少的硬币数目
      *
      * @param coins
@@ -877,7 +877,6 @@ public class test {
 
         return   -1;
     }
-
 
     public static String countAndSay(int n) {
      String  str = "1";
@@ -935,8 +934,6 @@ public class test {
 
 
     }
-
-
 
     public static List<String> getMonthBetween(String minDate, String maxDate) throws Exception
     {
@@ -1034,10 +1031,6 @@ public class test {
 
     }
 
-
-
-
-
     public static boolean getXO (String str) {
         // Good Luck!!
         int xnum=0;
@@ -1053,67 +1046,7 @@ public class test {
         }
         return  onum==xnum;
     }
-    public static void main(String[] args) throws Exception {
-        System.out.println(persistence(39));
 
-
-
-
-        String  test  = "camelCasing";
-        System.out.println(test.replaceAll("([A-Z])"," $1"));
-
-
-       // System.out.println(accum("abcd"));
-        int js = 2147483647;
-        System.out.println(js+1);
-       // System.out.println(findNb(1951195342281763600L));
-
-
-        String  str = "xxxoool";
-
-        System.out.println();
-
-       // System.out.println(findComplement(5));
-
-       /* for (String string : getMonthBetween("2008-01", "2020-06"))
-        {
-            System.out.println(string);
-        }
-        System.out.println(new Date());*/
-        // 311221
-        //System.out.println(newNsum("11"));
-        HashMap map  = new HashMap();
-        map.put("1",1);
-       int [] nums1 =  new int[]{40,48,61,75,100,99,98,39,30,10}, nums2 = new int[]{2,3}, nums3 = new int[]{3};
-    /*    System.out.println(peakIndexInMountainArray(nums1));
-       int [][] grid = new int[][]{{2,4},{6,8}};
-        System.out.println(CanEqualsValue(2,2,4));
-        System.out.println(Arrays.toString(fizzBuzz(3).toArray()));*/
-
-
-        //System.out.println( twoOutOfThree(nums1,nums2,nums3));
-        //System.out.println(percent(0, 0));
-         /*    List<?extends String> strings  = new LinkedList<>();
-
-        String [] nums = new String[]{"2","21","12","1"};
-        int   []  num = new int[]{1};
-        ListNode  node = new ListNode(1);
-        node.next=new ListNode(3);
-        node.next.next=new ListNode(2);
-        majorityElement(num);
-        Arrays.stream(getLeastNumbers(num,2)).forEach(System.out::println);
-    */
-        // int [] nums = new int[]{6,18,27,40,46,57,59,66,72,91};
-        // int[][] grid = new int [][]{{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
-        // System.out.println(binarySearch(nums,59));
-        // exchange(nums);
-        //  System.out.println(add(19,1));
-       // System.out.println(isMatch("ccc","abb"));;
-       // System.out.println(isHappy(19));
-        // System.out.println(maxAreaOfIsland(grid));
-
-
-    }
 
     public static int persistence(long n) {
         // your code
@@ -1189,25 +1122,346 @@ public class test {
     }
 
 
+    // 786. 第 K 个最小的素数分数
+    public static int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        if(arr.length<=2){
+            return  arr;
+        }
+        if(k==1) return new int[]{1,arr[arr.length-1]};
+        PriorityQueue<int []> q =new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return Integer.compare(o1[0]*o2[1],o2[0]*o1[1]);
+            }
+        });
+
+                for (int i = 0,len=arr.length; i <len ; i++) {
+                    for (int j = i+1; j <len ; j++) {
+                        q.add(new int[]{arr[i],arr[j]});
+                    }
+                }
+
+        for (int i = 0; i <k ; i++) {
+             q.poll();
+        }
+        return  q.poll();
+    }
+
+    public static int findNthDigit(int n) {
+        if (n <= 9) return n;
+        long start=1;
+        long count=9;
+        int digit=1;
+        while (n > count) { // 1.
+            n -= count;
+            digit += 1;
+            start *= 10;
+            count = digit * start * 9;
+        }
+        long number =  start+(n-1)/digit;
+        return  Long.toString(number).charAt((n - 1) % digit) - '0';
+
+         }
+
+/*  1-9  12
+    10 - 99 180
+    100 - 999  2700
+
+    1000-9999 2701-36000
+    10000-99999 36001-450000
+    */
+public static void main(String[] args) throws Exception {
+
+    int [] s  = new int[]{6,1,-2,-4};
+    System.out.println(letterCombinations("23"));
+   // System.out.println(threeSumClosest(s,1));
+   // System.out.println("16#*2".replaceAll("[10#*]",""));
+   // String  s = "1234567";
+    //System.out.println(Arrays.toString(s.toCharArray()));
+    int i=6;
+
+   // System.out.println(nextSmaller(236));
+   // 4948   9  00009
+    //4948   0  90009
+    //       0  99000
+
+    //System.out.println(longestSlideDown(new int[][]{{3}, {7, 4}, {2, 4,  6}, {8, 5, 9, 3}}));
+   // System.out.println(findNthDigit(1000000000));
+   /* System.out.println(kthSmallestPrimeFraction(new int[]{1,2,3,5},3));
+    System.out.println(persistence(39));*/
+
+
+
+
+/*
+    String  test  = "camelCasing";
+    System.out.println(test.replaceAll("([A-Z])"," $1"));
+*/
+
+
+    // System.out.println(accum("abcd"));
+    int js = 2147483647;
+    System.out.println(js+1);
+    // System.out.println(findNb(1951195342281763600L));
+
+
+    String  str = "xxxoool";
+
+    System.out.println();
+
+    // System.out.println(findComplement(5));
+
+       /* for (String string : getMonthBetween("2008-01", "2020-06"))
+        {
+            System.out.println(string);
+        }
+        System.out.println(new Date());*/
+    // 311221
+    //System.out.println(newNsum("11"));
+    HashMap map  = new HashMap();
+    map.put("1",1);
+    int [] nums1 =  new int[]{40,48,61,75,100,99,98,39,30,10}, nums2 = new int[]{2,3}, nums3 = new int[]{3};
+    /*    System.out.println(peakIndexInMountainArray(nums1));
+       int [][] grid = new int[][]{{2,4},{6,8}};
+        System.out.println(CanEqualsValue(2,2,4));
+        System.out.println(Arrays.toString(fizzBuzz(3).toArray()));*/
+
+
+    //System.out.println( twoOutOfThree(nums1,nums2,nums3));
+    //System.out.println(percent(0, 0));
+         /*    List<?extends String> strings  = new LinkedList<>();
+
+        String [] nums = new String[]{"2","21","12","1"};
+        int   []  num = new int[]{1};
+        ListNode  node = new ListNode(1);
+        node.next=new ListNode(3);
+        node.next.next=new ListNode(2);
+        majorityElement(num);
+        Arrays.stream(getLeastNumbers(num,2)).forEach(System.out::println);
+    */
+    // int [] nums = new int[]{6,18,27,40,46,57,59,66,72,91};
+    // int[][] grid = new int [][]{{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
+    // System.out.println(binarySearch(nums,59));
+    // exchange(nums);
+    //  System.out.println(add(19,1));
+    // System.out.println(isMatch("ccc","abb"));;
+    // System.out.println(isHappy(19));
+    // System.out.println(maxAreaOfIsland(grid));
+
+
+}
+
+
+
+    public void dfsSearch(int [][] array){
+     int  row = array.length;
+     int  col = array[0].length;
+     boolean [][] visit =new boolean[row][col];
+     int i=0,j=0;
+     int  total=row*col;
+     StringBuilder  sb  = new StringBuilder();
+     while(total>0){
+         if(i<=row-1 && j<= col-1 && !visit[i][j]){
+             sb.append(array[i][j++]);
+         }
 
 
 
 
 
 
+     }
+    }
 
 
+    public static int sumIntervals(int[][] intervals) {
+        // TODO: implement this method
+        if ( intervals==null || intervals.length == 0) {
+            return 0;
+        }
+        Arrays.sort(intervals,(v1,v2)->v1[0]-v2[0]);
+        int sum =0;
+        int start =intervals[0][0],end=intervals[0][1];
+        for (int[]  v:intervals) {
+            if(v[0]>start && v[0]>end){
+                sum+=end-start;start=v[0];end=v[1];
+            }else{
+                end = Math.max(end,v[1]);
+            }
+        }
+        return sum+=end-start;
+       /* return intervals == null ? 0 : (int) Arrays.stream(intervals)
+                .flatMapToInt(interval -> IntStream.range(interval[0], interval[1]))
+                .distinct()
+                .count();*/
+       // return megereIntervals(intervals).stream().mapToInt(e -> e[1] - e[0]).sum() ;
+    }
+    public static List<int[]> megereIntervals(int [][] intervals){
+        Arrays.sort(intervals,(v1,v2)->v1[0]-v2[0]);
+        List<int[] > res = new ArrayList<>();
+        for (int i = 0,len=intervals.length; i <len ; i++) {
+            int start = intervals[i][0] ,end = intervals[i][1];
+            if(res.size()==0|| res.get(res.size()-1)[1] < start){
+                res.add(new int[]{start, end});
+            }
+            else{
+                res.get(res.size()-1)[1] = Math.max(res.get(res.size()-1)[1], end);
+            }
+        }
+        return  res;
+    }
 
+    public static int longestSlideDown(int[][] pyramid) {
+        // Code Goes Here..
+        Stack<int []> stack =  new Stack<>();
+        for (int [] item: pyramid) { stack.push(item); }
+        int [] res = stack.pop();
+        while(!stack.isEmpty()){
+            int [] tmp = stack.pop();
+            for (int i = 0,len=tmp.length; i <len ; i++) {
+                tmp[i] = Math.max(tmp[i]+res[i],tmp[i]+res[i+1]);
+            }
+            res = tmp;
+        }
+        return  res[0];
+    }
 
+    public static String part(long n) {
+        // your code
 
+        return "";
+    }
+    public  List<int []> step_one(long n){
 
+     return null;
+    }
+    public static long nextSmaller(long n)
+    {
+        char[] carr = String.valueOf(n).toCharArray();
+        int len = carr.length, i;
+        for (i = len - 1; i > 0; i--) {
+            if (carr[i] < carr[i - 1]) break;
+        }
+        if (i == 0) return -1;
+        else {
+            int x = carr[i - 1], min = i;
+            for (int j = i + 1; j < len; j++) {
+                if (carr[j] < x && carr[j] > carr[min]) {
+                    min = j;
+                }
+            }
+            char temp = carr[i-1];
+            carr[i-1] = carr[min];
+            carr[min] = temp;
+            String[] sarr = String.valueOf(carr).split("");
+            java.util.Arrays.sort(sarr, i, len, java.util.Collections.reverseOrder());
+            long r = Long.valueOf(String.join("", sarr));
+            return String.valueOf(r).length() == len ? r : -1;
+        }
+    }
 
+    public static String SwapChar(String str, int a, int b)
+       {
+        char[] newStr = str.toCharArray();
+        newStr[a] = str.charAt(b);
+        newStr[b] = str.charAt(a);
+        return new String(newStr);
+    }
+    public  static  boolean  invalid(String s){
+        if(s.length()==1) {return  true;}
+        if(s.replaceAll(String.valueOf(s.charAt(0)),"").length()==0) {return  true;}
+        Integer  min  = Integer.parseInt(String.valueOf(s.charAt(0)));
+        for (int i = 1,len=s.length(); i <len ; i++) {
+            min = Math.min(min,Integer.parseInt(String.valueOf(s.charAt(i))));
+        }
+        if(min == Integer.parseInt(String.valueOf(s.charAt(0)))) {return  true;}
+        return  false;
+    }
 
+    public int getMaxDep(TreeNode root){
+       if(root ==null) return 0;
+       int rightdep = getMaxDep(root.right)+1;
+       int leftdep  = getMaxDep(root.left)+1;
+       return  Math.max(rightdep,leftdep);
+    }
 
+    public int[][] merge(int[][] intervals) {
+      Arrays.sort(intervals,(o1,o2)->Integer.compare(o1[0],o2[0]));
+      List<int[]> res = new ArrayList<>(16);
+        int start =intervals[0][0],end=intervals[0][1];
+        for (int [] t : intervals) {
+            if(t[0]>end){
+                res.add(new int[]{start,end});
+                start=t[0];
+                end=t[1];
+            }
+            else {
+                end=Math.max(end,t[1]);
+            }
+        }
+        res.add(new int[]{start,end});
+        return  res.toArray(new int[res.size()][]);
+    }
 
+    public  static  int threeSumClosest(int[] nums, int target) {
+        if(nums.length==3) return  Arrays.stream(nums).sum();
+        Arrays.sort(nums);
+        int sum=0;
+        int len =nums.length;
+        int min=Integer.MAX_VALUE;
+        for (int i = 0; i <len ; i++) {
+            if(i>0&&nums[i]==nums[i-1]) continue;
+            int l = i+1;
+            int r = len-1;
+            while(l<r){
+                int tmp = nums[i] + nums[l]+ nums[r];
+                if(tmp==target) return  tmp;
 
+                if(Math.abs(tmp-target)<min){
+                    min=Math.abs(tmp-target);
+                    sum=tmp;
+                }
+                if(tmp>target){
+                    r--;
+                }else {
+                    l++;
+                }
+            }
+        }
+          return sum;
+    }
 
-
-
+    public static List<String> letterCombinations(String digits) {
+        List<String> combinations = new ArrayList<String>();
+        if (digits.length() == 0) {
+            return combinations;
+        }
+        Map<Character, String> phoneMap = new HashMap<Character, String>() {{
+            put('2', "abc");
+            put('3', "def");
+            put('4', "ghi");
+            put('5', "jkl");
+            put('6', "mno");
+            put('7', "pqrs");
+            put('8', "tuv");
+            put('9', "wxyz");
+        }};
+        backtrack(combinations, phoneMap, digits, 0, new StringBuffer());
+        return combinations;
+    }
+    public static void backtrack(List<String> combinations, Map<Character, String> phoneMap, String digits, int index, StringBuffer combination) {
+        if (index == digits.length()) {
+            combinations.add(combination.toString());
+        } else {
+            char digit = digits.charAt(index);
+            String letters = phoneMap.get(digit);
+            int lettersCount = letters.length();
+            for (int i = 0; i < lettersCount; i++) {
+                combination.append(letters.charAt(i));
+                backtrack(combinations, phoneMap, digits, index + 1, combination);
+                combination.deleteCharAt(index);
+            }
+        }
+    }
 
 }

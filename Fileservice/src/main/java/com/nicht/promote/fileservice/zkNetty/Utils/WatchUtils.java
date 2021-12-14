@@ -1,5 +1,7 @@
 package com.nicht.promote.fileservice.zkNetty.Utils;
 
+
+
 import cn.hutool.core.util.HexUtil;
 
 import java.io.*;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 public class WatchUtils {
     public static void main(String[] args) {
-        System.out.println(HexUtil.decodeHexStr("e7a6bbe5bc80e58cbae59f9f28e58d97e4baac29e88c83e59bb4e68aa5e8ada600"));
+        System.out.println(HexUtil.decodeHexStr("e7a6bbe5bc80e58cbae59f9f28e58d97e4baac29e88c83e59bb4e68aa5e8ada6"));
         System.out.println(CreateSMSCommandStr("离开区域(南京)范围报警"));
         System.out.println( );
         byte[]  b   =  new byte[4];  b[0]=01;b[1]=02;b[2]=03;b[3]=05;
