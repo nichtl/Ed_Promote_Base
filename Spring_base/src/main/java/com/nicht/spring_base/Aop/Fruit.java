@@ -1,5 +1,7 @@
 package com.nicht.spring_base.Aop;
 
+import javax.annotation.PostConstruct;
+
 /**
  * @Author Nicht
  * @Description
@@ -16,6 +18,11 @@ public class Fruit {
 
     public String getFruitName() {
         return FruitName;
+    }
+
+   @PostConstruct
+    public void print(){
+        System.out.println("initmethod");
     }
 
     public void setFruitName(String fruitName) {

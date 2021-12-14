@@ -148,7 +148,7 @@ public class seven_thread_signaling {
         public  void dowait(){
             synchronized (myMonitorObject){
                 try {
-                    while (!waitSignal) {
+                    while (waitSignal) {
                         myMonitorObject.wait();  // 自旋不断让线程调用自己wait
                     }
                 }catch (Exception e){e.printStackTrace();}
@@ -200,7 +200,6 @@ public class seven_thread_signaling {
                myMonitorObject.notify();
            }
        }
-
 
 
    }
@@ -262,8 +261,6 @@ public class seven_thread_signaling {
                myMonitorObject.notify();
            }
        }
-
-
 
    }
 

@@ -60,7 +60,7 @@ public class BlockQueue {
        *  看下流程 B 调用 dequeue 时发现 queue.size==0 开始陷入wait(释放锁  然后A开始执行了enqueue
        *  然后A 检测到queue.size 为0 notifyall() 唤醒了B 然后执行add
        *  B被唤醒了然后 顺利执行remove
-       *  再看 有四个线程时  A B C D  queue.size  == 9
+       *  再看 有四个线程时  A B ; D  queue.size  == 9
        *  A B enqueue  C D dequeue  按 abcd 执行
        *  当A执行enqueue 时顺利入队  开始执行B B检测队列满了
        *  开始wait, C开始执行dequeue 发现队列满了 notifyall 然后执行出队

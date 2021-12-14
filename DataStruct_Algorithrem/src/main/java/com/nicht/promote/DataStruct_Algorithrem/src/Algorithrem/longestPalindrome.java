@@ -1,5 +1,7 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem;
 
+import java.util.HashMap;
+
 /**
  * @Author Nicht
  * @Description
@@ -16,10 +18,12 @@ public class longestPalindrome {
      *
      * */
     public static void main(String[] args) {
-        System.out.println(longestPalin("ccc"));
+
+        HashMap  map  =new HashMap();
+        map.put("name","zhangsan");
+        System.out.println(map.toString());
+       // System.out.println(longestPalin("ccc"));
     }
-
-
 
      public static String longestPalin(String s){
        // centerSpead

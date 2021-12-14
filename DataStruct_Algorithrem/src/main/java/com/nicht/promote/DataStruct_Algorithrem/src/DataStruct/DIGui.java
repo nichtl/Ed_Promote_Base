@@ -6,15 +6,12 @@ package com.nicht.promote.DataStruct_Algorithrem.src.DataStruct;
  */
 
 public class DIGui {
-
     public static void main(String[] args) {
 
 
         System.out.println(ysfdg(10,4,3));
 
     }
-
-
 
     // 约瑟夫问题
     //n个人围成圈，依次编号为1,2,..,n，现在从1号开始依次报数，当报到m时，报m的人退出，下一个人重新从1报起，循环下去，问最后剩下那个人的编号是多少？
@@ -25,8 +22,7 @@ public class DIGui {
      * @param n       循环几次
      * @return
      */
-    static int ysfdg(int sum, int value, int n)
-    {    //如果把每次剔除的后的人数重新组成一个环，那么就等于求每次新环的第一次剔除的人的编号，再反推还原 原始环的该人的编号
+    static int ysfdg(int sum, int value, int n) {    //如果把每次剔除的后的人数重新组成一个环，那么就等于求每次新环的第一次剔除的人的编号，再反推还原 原始环的该人的编号
         // 该方法的思路为
         // 将人数看成 对应的环数 sum=10 即10人环
         // 这里把约瑟夫环看作一个逐渐递增的环，由 1 人环 至 二人环 。。三人环
