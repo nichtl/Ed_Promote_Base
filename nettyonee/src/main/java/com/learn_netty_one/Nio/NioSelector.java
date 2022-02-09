@@ -110,11 +110,6 @@ public class NioSelector {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
     }
 
 

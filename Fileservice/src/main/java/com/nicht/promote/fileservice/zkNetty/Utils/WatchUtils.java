@@ -68,7 +68,7 @@ public class WatchUtils {
      * @return
      */
     public static String  CreateSosCommandStr(String Name,String TelPhoneNumber){
-        return  CreateCommandStr(WatchConstant.IssueMainPro, WatchConstant.IssueSecProCode.SetSosNum, WatchUtils.CreateSOsSettingData(Name, TelPhoneNumber));
+        return  CreateCommandStr(WatchConstant.IssueMainPro, WatchConstant.IssueSecProCode.SetSosNum, WatchUtils.CreateSosSettingData(Name, TelPhoneNumber));
     }
 
     /**
@@ -246,7 +246,7 @@ public class WatchUtils {
      * @param TelPhoneNumber   电话号码
      * @return 16进制字符
      */
-    private static String CreateSOsSettingData(String Name,String TelPhoneNumber ){
+    private static String CreateSosSettingData(String Name,String TelPhoneNumber ){
         StringBuilder  sb = new StringBuilder();
         sb.append(Name).append(":").append(TelPhoneNumber);
         return  HexUtil.encodeHexStr(sb.toString(),Charset.forName("utf-8"));

@@ -29,7 +29,7 @@ public class Select_Algorithm {
          return '0';
      }
 
-    /**
+     /**
      *
      * @param a
      * @param left
@@ -37,7 +37,7 @@ public class Select_Algorithm {
      * @param findval
      * @return
      */
-      //二分查找
+     //二分查找
      public static int binarySearch(int[] a,int left,int right,int findval){
       int mid = (left+right)/2;
       int midvale = a[mid];
