@@ -27,7 +27,6 @@ public class test {
         return Double.parseDouble(result);
     }
 
-
     public static int findRepeatNumber(int[] nums) {
         int res = -1;
         int temp;
@@ -447,17 +446,34 @@ public class test {
         return C;
     }
 
-    class TreeNode {
+    static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+              this.val = val;
+              this.left = left;
+              this.right = right;
+         }
 
-        TreeNode(int x) {
-            val = x;
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
         }
     }
 
-
+    public static void treePrint(TreeNode root){
+        if(root ==null) {  return;}
+        System.out.println(root.val);
+        treePrint(root.left);
+        treePrint(root.right);
+    }
     public static int numIslands(char[][] grid) {
         int landsum = 0;
         for (int i = 0; i < grid.length; i++) {
@@ -562,7 +578,7 @@ public class test {
         return null;
     }
 
-    //输入一个字符串，打印出该字符串中字符的所有排列。
+//输入一个字符串，打印出该字符串中字符的所有排列。
 //
 //
 //
@@ -625,7 +641,6 @@ public class test {
             if (map.containsKey(n)) return n == 1 ? true : false;
             map.put(n, true);
             n = getSum(n);
-
         }
     }
 
@@ -1163,93 +1178,6 @@ public class test {
 
          }
 
-/*  1-9  12
-    10 - 99 180
-    100 - 999  2700
-
-    1000-9999 2701-36000
-    10000-99999 36001-450000
-    */
-public static void main(String[] args) throws Exception {
-
-    int [] s  = new int[]{6,1,-2,-4};
-    System.out.println(letterCombinations("23"));
-   // System.out.println(threeSumClosest(s,1));
-   // System.out.println("16#*2".replaceAll("[10#*]",""));
-   // String  s = "1234567";
-    //System.out.println(Arrays.toString(s.toCharArray()));
-    int i=6;
-
-   // System.out.println(nextSmaller(236));
-   // 4948   9  00009
-    //4948   0  90009
-    //       0  99000
-
-    //System.out.println(longestSlideDown(new int[][]{{3}, {7, 4}, {2, 4,  6}, {8, 5, 9, 3}}));
-   // System.out.println(findNthDigit(1000000000));
-   /* System.out.println(kthSmallestPrimeFraction(new int[]{1,2,3,5},3));
-    System.out.println(persistence(39));*/
-
-
-
-
-/*
-    String  test  = "camelCasing";
-    System.out.println(test.replaceAll("([A-Z])"," $1"));
-*/
-
-
-    // System.out.println(accum("abcd"));
-    int js = 2147483647;
-    System.out.println(js+1);
-    // System.out.println(findNb(1951195342281763600L));
-
-
-    String  str = "xxxoool";
-
-    System.out.println();
-
-    // System.out.println(findComplement(5));
-
-       /* for (String string : getMonthBetween("2008-01", "2020-06"))
-        {
-            System.out.println(string);
-        }
-        System.out.println(new Date());*/
-    // 311221
-    //System.out.println(newNsum("11"));
-    HashMap map  = new HashMap();
-    map.put("1",1);
-    int [] nums1 =  new int[]{40,48,61,75,100,99,98,39,30,10}, nums2 = new int[]{2,3}, nums3 = new int[]{3};
-    /*    System.out.println(peakIndexInMountainArray(nums1));
-       int [][] grid = new int[][]{{2,4},{6,8}};
-        System.out.println(CanEqualsValue(2,2,4));
-        System.out.println(Arrays.toString(fizzBuzz(3).toArray()));*/
-
-
-    //System.out.println( twoOutOfThree(nums1,nums2,nums3));
-    //System.out.println(percent(0, 0));
-         /*    List<?extends String> strings  = new LinkedList<>();
-
-        String [] nums = new String[]{"2","21","12","1"};
-        int   []  num = new int[]{1};
-        ListNode  node = new ListNode(1);
-        node.next=new ListNode(3);
-        node.next.next=new ListNode(2);
-        majorityElement(num);
-        Arrays.stream(getLeastNumbers(num,2)).forEach(System.out::println);
-    */
-    // int [] nums = new int[]{6,18,27,40,46,57,59,66,72,91};
-    // int[][] grid = new int [][]{{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
-    // System.out.println(binarySearch(nums,59));
-    // exchange(nums);
-    //  System.out.println(add(19,1));
-    // System.out.println(isMatch("ccc","abb"));;
-    // System.out.println(isHappy(19));
-    // System.out.println(maxAreaOfIsland(grid));
-
-
-}
 
 
 
@@ -1361,7 +1289,7 @@ public static void main(String[] args) throws Exception {
     }
 
     public static String SwapChar(String str, int a, int b)
-       {
+    {
         char[] newStr = str.toCharArray();
         newStr[a] = str.charAt(b);
         newStr[b] = str.charAt(a);
@@ -1449,6 +1377,7 @@ public static void main(String[] args) throws Exception {
         backtrack(combinations, phoneMap, digits, 0, new StringBuffer());
         return combinations;
     }
+
     public static void backtrack(List<String> combinations, Map<Character, String> phoneMap, String digits, int index, StringBuffer combination) {
         if (index == digits.length()) {
             combinations.add(combination.toString());
@@ -1463,5 +1392,163 @@ public static void main(String[] args) throws Exception {
             }
         }
     }
+
+    public static void recoverTree(TreeNode root) {
+
+        reTree(root);
+
+    }
+
+    public static void reTree(TreeNode treeNode){
+        if(treeNode==null) return;
+
+        if( treeNode.left!=null&& treeNode.left.val> treeNode.val){
+               int tmp = treeNode.left.val;
+             treeNode.left.val = treeNode.val;
+             treeNode.val = tmp;
+        }
+
+        if(treeNode.right!=null&& treeNode.right.val< treeNode.val){
+            int tmp = treeNode.right.val;
+            treeNode.right.val = treeNode.val;
+            treeNode.val = tmp;
+        }
+        reTree(treeNode.left);
+        reTree(treeNode.right);
+    }
+
+
+    public static boolean isNStraightHand(int[] hand, int groupSize) {
+        int len = hand.length;
+        if(len==0||len%groupSize!=0){
+            return  false;
+        }
+        if(groupSize==1){
+            return  true;
+        }
+
+       return  canAccess(hand, groupSize);
+    }
+    public static boolean canAccess(int[] hand, int groupSize){
+        boolean res = true;
+        Arrays.sort(hand);
+        int  start=0;
+        int  end  = groupSize-1;
+        while (start<hand.length){
+            if(hand[end]-hand[start]!= groupSize-1){
+                res=false;
+                break;
+            }
+                start+=groupSize;
+                end  +=groupSize;
+        }
+        return res;
+    }
+
+    /*1-9  12
+        10 - 99 180
+        100 - 999  2700
+        1000-9999 2701-36000
+        10000-99999 36001-450000
+        */
+    public static void main(String[] args) throws Exception {
+        System.out.println(numberOfMatches(14));
+       // System.out.println(isNStraightHand(new int[]{1,2,3,6,2,3,4,7,8},3));
+        TreeNode root =new TreeNode(3);
+        root.left = new TreeNode(1);
+        root.left.right = new TreeNode(4);
+        root.left.right.left = new TreeNode(2);
+        //reTree(root);
+        //treePrint(root);
+        int [] s  = new int[]{6,1,-2,-4};
+        //  System.out.println(letterCombinations("23"));
+        // System.out.println(threeSumClosest(s,1));
+        // System.out.println("16#*2".replaceAll("[10#*]",""));
+        // String  s = "1234567";
+        //System.out.println(Arrays.toString(s.toCharArray()));
+        int i=6;
+        // System.out.println(nextSmaller(236));
+        // 4948   9  00009
+        //4948   0  90009
+        //       0  99000
+        //System.out.println(longestSlideDown(new int[][]{{3}, {7, 4}, {2, 4,  6}, {8, 5, 9, 3}}));
+        // System.out.println(findNthDigit(1000000000));
+        /* System.out.println(kthSmallestPrimeFraction(new int[]{1,2,3,5},3));
+        System.out.println(persistence(39));*/
+
+        /*
+            String  test  = "camelCasing";
+            System.out.println(test.replaceAll("([A-Z])"," $1"));
+        */
+
+
+        // System.out.println(accum("abcd"));
+        int js = 2147483647;
+        System.out.println(js+1);
+        // System.out.println(findNb(1951195342281763600L));
+
+
+        String  str = "xxxoool";
+
+        System.out.println();
+
+        // System.out.println(findComplement(5));
+
+        /* for (String string : getMonthBetween("2008-01", "2020-06"))
+        {
+            System.out.println(string);
+        }
+        System.out.println(new Date());*/
+        // 311221
+        //System.out.println(newNsum("11"));
+        HashMap map  = new HashMap();
+        map.put("1",1);
+        int [] nums1 =  new int[]{40,48,61,75,100,99,98,39,30,10}, nums2 = new int[]{2,3}, nums3 = new int[]{3};
+        /*System.out.println(peakIndexInMountainArray(nums1));
+        int [][] grid = new int[][]{{2,4},{6,8}};
+        System.out.println(CanEqualsValue(2,2,4));
+        System.out.println(Arrays.toString(fizzBuzz(3).toArray()));*/
+        //System.out.println( twoOutOfThree(nums1,nums2,nums3));
+        //System.out.println(percent(0, 0));
+         /*    List<?extends String> strings  = new LinkedList<>();
+        String [] nums = new String[]{"2","21","12","1"};
+        int   []  num = new int[]{1};
+        ListNode  node = new ListNode(1);
+        node.next=new ListNode(3);
+        node.next.next=new ListNode(2);
+        majorityElement(num);
+        Arrays.stream(getLeastNumbers(num,2)).forEach(System.out::println);*/
+        // int [] nums = new int[]{6,18,27,40,46,57,59,66,72,91};
+        // int[][] grid = new int [][]{{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
+        // System.out.println(binarySearch(nums,59));
+        // exchange(nums);
+        //  System.out.println(add(19,1));
+        // System.out.println(isMatch("ccc","abb"));;
+        // System.out.println(isHappy(19));
+        // System.out.println(maxAreaOfIsland(grid));
+    }
+
+    public boolean increasingTriplet(int[] nums) {
+       int a= nums[0];
+       int b = Integer.MAX_VALUE;
+        for (int i = 1,len=nums.length; i <len ; i++) {
+              if(nums[i]<= a) {a=nums[i];}
+              else if(nums[i]<=b){b=nums[i];}
+              else {return  true;}
+        }
+        return  false;
+
+    }
+    //1688. 比赛中的配对次数
+    public static int numberOfMatches(int n) {
+     return numberOfMatches(n,0);
+    }
+    public static int numberOfMatches(int n,int value){
+     if(n == 1) return  value;
+        value +=  n%2==0?n/2:(n-1)/2;
+        n= n%2==0?n/2:(n-1)/2+1;
+     return numberOfMatches(n,value);
+    }
+
 
 }

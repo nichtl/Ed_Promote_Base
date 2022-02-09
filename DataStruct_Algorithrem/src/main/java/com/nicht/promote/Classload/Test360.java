@@ -2,11 +2,41 @@ package com.nicht.promote.Classload;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class Test360 implements Serializable {
     public static void main(String[] args) {
-        Set<String> stringSet = new HashSet<>();
+        ExecutorService forkJoinPool= new ThreadPoolExecutor(10,100,10L,
+                TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(100),
+                Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardOldestPolicy());
+        // 创建异步执行任务:
+        CompletableFuture.runAsync(()->{
+            System.out.println(Fbonaci(10));
+        },forkJoinPool);
+        /*CompletableFuture<Double> cf1 = CompletableFuture.supplyAsync(
+                ()->{
+                    System.out.println(Thread.currentThread()+" start job1,time->"+System.currentTimeMillis());
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                    }
+                    System.out.println(Thread.currentThread()+" exit job1,time->"+System.currentTimeMillis());
+                    return 1.2;
+                }
+                ,forkJoinPool);
+        cf1.thenApplyAsync((result)->{
+            System.out.println(Thread.currentThread()+" start job2,time->"+System.currentTimeMillis());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
+            System.out.println(Thread.currentThread()+" exit job2,time->"+System.currentTimeMillis());
+
+            return 1.3+result;
+        },forkJoinPool);*/
+
+ /*       Set<String> stringSet = new HashSet<>();
         stringSet.add("sa");
         stringSet.add("cd");
         System.out.println();
@@ -15,7 +45,7 @@ public class Test360 implements Serializable {
         System.out.println(stripComments(s,new String[] { "#", "!" }));
         s=s.replaceAll("\n","");
        
-        int [] a = new int[]{6,6,6,6};
+        int [] a = new int[]{6,6,6,6};*/
         //System.out.println(distributeCandies(a));
     }
     public static  String admin(){
@@ -91,7 +121,6 @@ public class Test360 implements Serializable {
             Math.max(res,(j-i)*(height[i++])): Math.max(res,(j-i)*(height[j--]));
         }
         return  res;
-       
     }
 
     public static long ipsBetween(String start, String end) {
@@ -100,5 +129,6 @@ public class Test360 implements Serializable {
         return -1;
     }
 
-    
+
+
 }

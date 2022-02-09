@@ -24,8 +24,6 @@ public class Rtest1 {
         //The Generics Reflection Rule of Thumb
         List<? extends String > list = new ArrayList<>();
 
-
-
     }
 
 

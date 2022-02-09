@@ -75,7 +75,6 @@ public class binarySearch {
 
 
     public List<Integer> majorityElement(int[] nums) {
-        List<Integer>  res  = new ArrayList<>();
         HashMap<Integer,Integer> map  = new HashMap();
         for (int i = 0,len=nums.length; i <len ; i++) {
             if(map.containsKey(nums[i])){
@@ -85,10 +84,9 @@ public class binarySearch {
             map.put(nums[i],1);
         }
         int len = nums.length/3;
+        List<Integer> res = new ArrayList<>();
         map.forEach((k,v)->{
-            if(v>len){
-                res.add(k);
-            }
+            if(v>len){ res.add(k); }
         });
         return  res;
 
@@ -123,4 +121,38 @@ public class binarySearch {
 
 
     }
+    /**
+     * 219. 存在重复元素 II
+     */
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer,Integer>  map = new HashMap<>(16);
+        for (int i = 0,len= nums.length; i < len ; i++) {
+             if(map.containsKey(nums[i])) {
+                  int t=  Math.abs(map.get(nums[i]) - i);
+                  if(t<= k) return  true;
+             }
+             map.put(nums[i],i);
+        }
+        return  false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

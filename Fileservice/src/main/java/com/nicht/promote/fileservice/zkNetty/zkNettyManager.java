@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
  * @Time 2021/4/15
  * @Link
  */
-@jdk.nashorn.internal.runtime.logging.Logger
 public class zkNettyManager implements SocketService {
 
 

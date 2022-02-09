@@ -126,10 +126,6 @@ public class ibatisHandle {
                             break;
                         default: break;
                     }
-
-
-
-
                 });
             }
         });
@@ -153,7 +149,7 @@ public class ibatisHandle {
         ToDate("(?i)to_date\\('\\$(\\w*)\\$'","to_date(#$1#"),
         /*处理 ='$type$' */
         Equals("={1}\\s*(')?\\$(\\w*)\\$(')?","=#$2#"),
-        /*针对insert 中,'$type$' */
+        /*针对insert update 中,'$type$' */
         UpdateEquals(",\\s*(')?\\$(\\w*)\\$(')?",",#$2#"),
         /*处理('$id$'*/
         InsertId("(?i)values\\s*\\(\\s*(')?\\$(\\w*)\\$(')?","values(#$2#"),

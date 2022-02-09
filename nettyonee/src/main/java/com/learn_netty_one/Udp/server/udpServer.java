@@ -25,6 +25,7 @@ public class udpServer {
                   .channel(NioDatagramChannel.class)
                   .option(ChannelOption.SO_BROADCAST,true)
                   .handler( new udpHandle());
+          b.bind(port);
 
 
 
