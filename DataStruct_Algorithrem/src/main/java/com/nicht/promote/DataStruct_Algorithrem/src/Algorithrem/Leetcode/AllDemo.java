@@ -16,7 +16,7 @@ import java.util.stream.StreamSupport;
  * @Time 2021/8/30
  * @Link
  */
-public class test {
+public class AllDemo {
     public static Double percent(int a, int b) {
         String result = null;
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
@@ -1477,8 +1477,8 @@ public class test {
         System.out.println(persistence(39));*/
 
         /*
-            String  test  = "camelCasing";
-            System.out.println(test.replaceAll("([A-Z])"," $1"));
+            String  AllDemo  = "camelCasing";
+            System.out.println(AllDemo.replaceAll("([A-Z])"," $1"));
         */
 
 
