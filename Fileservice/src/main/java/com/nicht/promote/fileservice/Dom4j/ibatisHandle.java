@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @Author Nicht
- * @Description
+ * @Description 处理xml sql里的$ 符号 替换为#
  * @Time 2021/8/9
  * @Link
  */
