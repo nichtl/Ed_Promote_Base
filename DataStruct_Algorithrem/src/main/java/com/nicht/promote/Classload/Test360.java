@@ -7,13 +7,16 @@ import java.util.stream.Collectors;
 
 public class Test360 implements Serializable {
     public static void main(String[] args) {
+
+
+
         ExecutorService forkJoinPool= new ThreadPoolExecutor(10,100,10L,
                 TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(100),
                 Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardOldestPolicy());
         // 创建异步执行任务:
-        CompletableFuture.runAsync(()->{
-            System.out.println(Fbonaci(10));
-        },forkJoinPool);
+       // CompletableFuture.runAsync(()->{
+        //    System.out.println(Fbonaci(10));
+        //},forkJoinPool);
         /*CompletableFuture<Double> cf1 = CompletableFuture.supplyAsync(
                 ()->{
                     System.out.println(Thread.currentThread()+" start job1,time->"+System.currentTimeMillis());
