@@ -28,7 +28,7 @@ public class SimpleChatClient {
         this.port = port;
     }
     public  void run ()throws Exception {
-        EventLoopGroup  group = new NioEventLoopGroup();
+        EventLoopGroup  group =  new NioEventLoopGroup();
         try{
             Bootstrap b = new Bootstrap();
             b.group(group)

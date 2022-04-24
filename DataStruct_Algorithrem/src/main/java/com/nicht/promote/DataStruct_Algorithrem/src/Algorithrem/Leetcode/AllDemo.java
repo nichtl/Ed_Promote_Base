@@ -638,7 +638,7 @@ public class AllDemo {
     public static boolean isHappy(int n) {
         HashMap<Integer, Boolean> map = new HashMap<>();
         while (true) {
-            if (map.containsKey(n)) return n == 1 ? true : false;
+            if (map.containsKey(n)) return n == 1;
             map.put(n, true);
             n = getSum(n);
         }
