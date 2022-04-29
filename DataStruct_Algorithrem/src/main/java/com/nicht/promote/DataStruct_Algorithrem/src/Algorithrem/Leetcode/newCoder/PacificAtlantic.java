@@ -122,10 +122,10 @@ public static Boolean dfsSerach2(int [][] heights, boolean [][] visited  ,int i,
             return  true;
         }
         pre = heights[i][j];
-        boolean ans =   dfsSerach2(heights, visited, --i, j, pre)
-                || dfsSerach2(heights, visited, i, --j, pre)
-                || dfsSerach2(heights, visited, ++i, j, pre)
-                || dfsSerach2(heights, visited, i, ++j, pre);
+        boolean ans = dfsSerach2(heights, visited, --i, j, pre)
+                     || dfsSerach2(heights, visited, i, --j, pre)
+                     || dfsSerach2(heights, visited, ++i, j, pre)
+                     || dfsSerach2(heights, visited, i, ++j, pre);
         return  ans;
     }
 
