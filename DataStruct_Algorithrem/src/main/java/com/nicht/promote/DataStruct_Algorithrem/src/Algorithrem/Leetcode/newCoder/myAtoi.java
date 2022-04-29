@@ -107,12 +107,12 @@ public class myAtoi {
                 return Integer.MAX_VALUE;
             }
             if(num<=Integer.MIN_VALUE&&num.toString().length()==8){
-
+                return  Integer.MIN_VALUE;
             }
             num=num*10+Integer.valueOf(s.charAt(index));
         }
 
-        return  0;
+        return  num;
 
     }
 
