@@ -23,11 +23,11 @@ public class TextDecoder extends ByteToMessageDecoder {
     public static final int MAX_LENGTH  = 4038;  //数据包最大长度
     static WatchBeans watchBeans;
     /**记录半包写位置*/
-    private static Integer  HalfPackWriterIndex=0;
+    private static Integer  HalfPackWriteIndex=0;
     static  byte[] msg;
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf byteBuf, List<Object> out) throws Exception {
-        checkDataClash(byteBuf,HalfPackWriterIndex);
+        checkDataClash(byteBuf,HalfPackWriteIndex);
         if (watchBeans==null){watchBeans=new WatchBeans();}
         int beginReaderIndex = byteBuf.readerIndex();
         byteBuf.markReaderIndex();
@@ -54,7 +54,7 @@ public class TextDecoder extends ByteToMessageDecoder {
             System.out.println("数据包未完全到达等待数据包  当前可读字节"+byteBuf.readableBytes()+"总数据长度="+watchBeans.getDatalen());
             //还原读指针 让buffer先不释放数据  继续缓存下一个包
             internalBuffer().readerIndex(beginReaderIndex);
-            HalfPackWriterIndex = byteBuf.writerIndex();
+            HalfPackWriteIndex = byteBuf.writerIndex();
             return;
         }
         /*是文件内容字节退出  数据大于500说明是文件传入 */
@@ -62,7 +62,7 @@ public class TextDecoder extends ByteToMessageDecoder {
                 byteBuf.resetReaderIndex();
                 /*处理文件半包过程中插入定时上报数据*/
                 System.out.println("转发文件解码器");
-                HalfPackWriterIndex=0;
+                HalfPackWriteIndex=0;
                 byteBuf.retain(1);  //writeandflush后会被释放   retain  引用计数加一
                 ctx.fireChannelRead(byteBuf);
         }
