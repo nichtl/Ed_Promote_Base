@@ -93,27 +93,32 @@ public class myAtoi {
     }
 
     public int myAtoi(String s) {
+        s=s.trim();
+        if(s.length() ==0){return 0;}
         int index = 0 ;
 
         while ( ' ' ==s.charAt(index) ){
             index++;
         }
         Integer num=1;
-        if(s.charAt(index) == '-'){
-            num=-1;
-        }
-        while (Character.isDigit(s.charAt(index))){
-            if(num>=Integer.MAX_VALUE){
-                return Integer.MAX_VALUE;
+        if (s.charAt(index) == '-' || s.charAt(index) == '+'){
+            if( num ==1 &&s.charAt(index) == '-'){
+                num=-1;
             }
-            if(num<=Integer.MIN_VALUE&&num.toString().length()==8){
-                return  Integer.MIN_VALUE;
-            }
-            num=num*10+Integer.valueOf(s.charAt(index));
+            index++;
         }
 
-        return  num;
-
+        long ans = 0;
+        while (index<s.length() && Character.isDigit(s.charAt(index))){
+            ans =ans*10L+(s.charAt(index++)-'0');
+            if(num==1 && ans> Integer.MAX_VALUE){
+                ans =  Integer.MAX_VALUE; break;
+            }
+            if(num==-1 && ans>1L+Integer.MAX_VALUE){
+                ans = 1L+Integer.MAX_VALUE; break;
+            }
+        }
+        return  num==1?(int)ans:(int)-ans;
     }
 
 
