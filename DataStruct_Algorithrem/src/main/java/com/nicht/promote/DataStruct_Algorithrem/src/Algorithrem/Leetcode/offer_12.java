@@ -56,7 +56,7 @@ public class offer_12 {
     public static void main(String[] args) {
         List<String> ew = Arrays.asList("1","2","3");
         List<String> sa = ew.stream().filter(v-> "3".equals(v)).collect(Collectors.toList());
-        System.out.println();
+        System.out.println(sa);
         char [] []  chars  = new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
         String word ="ABCCED";
         System.out.println(exist(chars,word));

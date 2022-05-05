@@ -148,7 +148,7 @@ public class MyStringDecoder extends ByteToMessageDecoder {
                 watchBeans.setSms(sms);
                 out.add(watchBeans);
             }
-            /*定位上报    此处float数据应该是大端序但在数据是小端序 需要将小端序转换为大端序后才能使用*/
+            /*定位上报    此处float数据应该是大端序但发过来是小端序 需要将小端序转换为大端序后才能使用*/
             else if (WatchConstant.UploadMainPro.equals(watchBeans.getMainpro())&&WatchConstant.UploadSecProCode.UploadLocateData.equals(watchBeans.getSecpro())) {
                 if (locateMsg==null){
                     locateMsg  = new LocateMsg();
