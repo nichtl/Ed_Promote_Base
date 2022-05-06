@@ -80,7 +80,6 @@ public class FourSum {
                      else if(tmp >target){r--;}
                      else {l++;}
                  }
-
             }
         }
         return  res;

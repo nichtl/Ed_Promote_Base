@@ -99,7 +99,7 @@ public class TextDecoder extends ByteToMessageDecoder {
                 byteBuf.clear();
                 byteBuf.writeBytes(tempmsg);
             }
-        }catch (UnsupportedEncodingException e){
+        }catch (Exception  e){
             e.printStackTrace();
         }
 
