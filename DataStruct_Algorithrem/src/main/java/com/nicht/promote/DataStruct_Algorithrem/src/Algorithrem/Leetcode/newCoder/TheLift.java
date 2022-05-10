@@ -18,7 +18,7 @@ public class TheLift {
         while (true){
             // when theLift isEmpty &&  nobody waiting for theLift
             if(theLift.isEmpty()&&queueIsEmpty(queues)) {
-                // when  theLift  stop curFloor is not fisrt floor
+                // when  theLift  stop curFloor is not first floor
                 if(curFloor!=0){theLiftStopRecord.add(0);}
                 break;
             }
