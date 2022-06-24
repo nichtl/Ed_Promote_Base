@@ -9,8 +9,6 @@ package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCod
 public class SearchTreeLeftestNode {
     int MaxHeight =0;
     int curVal    =0;
-
-
     public int findBottomLeftValue(TreeNode root) {
        dfs(root,1);
        return  curVal;
