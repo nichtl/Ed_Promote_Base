@@ -6,7 +6,7 @@ import com.nicht.promote.fileservice.zkNetty.Beans.LocateMsg;
 import com.nicht.promote.fileservice.zkNetty.Beans.Sms;
 import com.nicht.promote.fileservice.zkNetty.Beans.WatchBeans;
 import io.netty.buffer.ByteBuf;
-
+import java.io.UnsupportedEncodingException;
 /**
  * @Author Nicht
  * @description
@@ -60,7 +60,7 @@ public class CodecParserUtils {
         return hex.toString();
     }
     /*解析前四个公共数据*/
-    public  static  void ParserPublicData(ByteBuf byteBuf, WatchBeans watchBeans) throws UnsupportedEncodingException {
+    public  static  void ParserPublicData(ByteBuf byteBuf, WatchBeans watchBeans) throws Exception {
         StringBuilder  sb =new StringBuilder();
         byte [] msg  ;
         msg=new byte[5];

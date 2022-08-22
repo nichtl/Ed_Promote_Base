@@ -20,12 +20,8 @@ public class FileDecoder extends ByteToMessageDecoder{
     private Integer FileTotalSize =0;//文件总大小
     static WatchBeans watchBeans;
     static byte[] msg;
-    static ThreadLocal<Integer> filePackNum =new ThreadLocal(){
-        @Override
-        protected Object initialValue() {
-            return new Integer(-1);
-        }
-    };
+    static ThreadLocal<Integer> filePackNum = ThreadLocal.withInitial(()->-1);
+
     /*字节序 设备是小端  java window linux是大端 接受int  float  long 都转为数据需要将数据还原再解析 */
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf byteBuf, List<Object> out) throws Exception {
