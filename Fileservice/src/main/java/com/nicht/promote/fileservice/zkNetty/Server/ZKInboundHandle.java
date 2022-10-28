@@ -1,7 +1,11 @@
 package com.nicht.promote.fileservice.zkNetty.Server;
 
 
+import com.nicht.promote.fileservice.SimapleChat.Beans.WatchBeans;
+import com.nicht.promote.fileservice.SimapleChat.CommandBeans.WatchConstant;
 import com.nicht.promote.fileservice.zkNetty.OnSocketListener;
+import com.nicht.promote.fileservice.zkNetty.Utils.ByteUtils;
+import com.nicht.promote.fileservice.zkNetty.Utils.WatchUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -73,14 +77,73 @@ public class ZKInboundHandle implements ChannelInboundHandler {   /*TextWebSocke
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        try {
-            Channel incoming = ctx.channel();  //当前channel 连接
-            if (listener != null){
-                listener.onReceive(ctx.channel(),msg);
+//        try {
+//            Channel incoming = ctx.channel();  //当前channel 连接
+//            if (listener != null){
+//                listener.onReceive(ctx.channel(),msg);
+//            }
+//        } finally {
+//            ReferenceCountUtil.release(msg);
+//        }
+        WatchBeans watchmsg = (WatchBeans) msg;
+        Channel incoming = ctx.channel();  //当前channel 连接
+        /*上传类*/
+        if(WatchConstant.UploadMainPro.equals(watchmsg.getMainpro())) {
+            if (!WatchConstant.UploadSecProCode.UploadFileData.equals(watchmsg.getSecpro())) {
+                switch (watchmsg.getSecpro()){
+                    case WatchConstant.UploadSecProCode.UploadFileRequest:
+                        /*下发文件标识通知上传*/
+                        ByteUtils.send2client(incoming, WatchConstant.CenterReplyCommand.FileRequestReply);
+                        break;
+                    case WatchConstant.UploadSecProCode.UploadLocateData:
+                        /*定位上报消息回复*/
+                        if ("-1".equals(watchmsg.getLocateMsg().getData_type())) {//回复签到成功
+                            System.out.println(watchmsg.getLocateMsg().toString());
+                            ByteUtils.send2client(incoming, WatchUtils.CreateSosCommandStr("王五","15824914901"));
+                            ByteUtils.send2client(incoming, WatchConstant.CenterReplyCommand.DailySignInReply);
+                        }
+                        break;
+                    case WatchConstant.UploadSecProCode.UploadFileDataResponse:
+                        /*通知继续上传*/
+                        System.out.println("回复接受文件完毕" + WatchConstant.CenterReplyCommand.UploadFileReply);
+                        ByteUtils.send2client(incoming, WatchConstant.CenterReplyCommand.UploadFileReply);
+                        break;
+                    case   WatchConstant.UploadSecProCode.TextMsg:
+                        /*终端上传短信*/
+                        System.out.println(watchmsg.getSms().toString());
+                        break;
+                    case   WatchConstant.UploadSecProCode.UploadFileData:
+                        System.out.println("成功上传保存文件");
+                        ByteUtils.byte2image(ByteUtils.Byf2Bytes(ByteUtils.bytes2Bytebuf(watchmsg.getBytesdata())), "/tmp" + watchmsg.getFileInfo().getFile_name());
+                    default: break;
+
+                }
             }
-        } finally {
-            ReferenceCountUtil.release(msg);
+
         }
+        /*下发类*/
+        if (WatchConstant.IssueMainPro.equals(watchmsg.getMainpro())){
+            switch (watchmsg.getSecpro()){
+                /**短信处理*/
+                case WatchConstant.IssueSecProCode.TextMsgRes:
+                    if(watchmsg.getCommandSendSuccess()){
+                        System.out.println("短信发送成功: "+watchmsg.getSendTime());
+                    }else {
+                        System.out.println("短信发送失败:");
+                    }
+                    break;
+                /**同步设备参数*/
+                case WatchConstant.IssueSecProCode.SyncDeviceSetting:
+                    System.out.println("同步终端参数成功: "+watchmsg.getStr_Data());
+                    break;
+                /**其他统一格式回复处理*/
+                default:
+                    System.out.println("命令下发终端回复结果: "+watchmsg.getStr_Data()); break;
+            }
+
+
+        }
+        ReferenceCountUtil.safeRelease(msg);///bytebuf引用释放*/
     }
 
     @Override
