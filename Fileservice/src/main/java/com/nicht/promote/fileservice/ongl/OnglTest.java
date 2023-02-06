@@ -58,13 +58,12 @@ public class OnglTest {
         OgnlContext ognlContext = (OgnlContext) Ognl.createDefaultContext(param,new DefaultMemberAccess(true),new DefaultClassResolver(),new DefaultTypeConverter());
         ognlContext.setRoot(param);
         ognlContext.put("params",param);
-        Object outParam = "@java.lang.Object  val1=  #params.get(\"data\"); if(val1 !=null) { val1.get(\"cc\")} else{return null;} ";
 
         Object ans = Ognl.getValue(Ognl.parseExpression("#params.get('data').get('cc').get('c1') "), ognlContext, ognlContext.getRoot());
 
-        String express = "@cn.hutool.core.convert.Convert@convert(@java.lang.Long.TYPE,\"222\")";
-        Object ss = Ognl.getValue(Ognl.parseExpression(express) , ognlContext, ognlContext.getRoot());
-        System.out.println("实例方法执行： " + ss);
+//        String express = "@cn.hutool.core.convert.Convert@convert(@java.lang.Long.TYPE,\"222\")";
+//        Object ss = Ognl.getValue(Ognl.parseExpression(express) , ognlContext, ognlContext.getRoot());
+        System.out.println("实例方法执行： " + ans);
 
 
         System.out.println(1);
