@@ -7,7 +7,7 @@ package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.wande;
 public class TASK  implements  Comparable<TASK>{
     @Override
     public int compareTo(TASK o) {
-       return Integer.compare(o.priority, priority);
+       return Integer.compare(o.priority, this.priority);
     }
 
     private  String name;

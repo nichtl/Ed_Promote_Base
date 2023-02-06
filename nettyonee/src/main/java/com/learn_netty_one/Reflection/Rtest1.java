@@ -9,6 +9,7 @@ import com.learn_netty_one.Reflection.model.UserBean;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +19,10 @@ import java.util.List;
  */
 public class Rtest1 {
     public static void main(String[] args) throws ClassNotFoundException {
+        HashMap map = new HashMap();
+
+
+
         Method [] methods = UserBean.class.getMethods();
         Arrays.stream(methods).forEach((method) -> {
             System.out.println(method.getName());

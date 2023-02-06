@@ -1,5 +1,6 @@
 package com.nicht.log4jbug;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.ConfigurationSource;
@@ -19,8 +20,8 @@ public class Log4j2Demo {
 
     public static void main(String[] args) {
         try {
-            File file = new File("D:\\MyTools\\Project\\Ed_Promote_Base\\log4jbug\\src\\main\\resources\\log4j.xml");
-            BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
+            ClassPathResource resource  = new ClassPathResource("log4j.xml");//原xml文件夹
+            BufferedInputStream in = new BufferedInputStream(resource.getStream());
             final ConfigurationSource source = new ConfigurationSource(in);
             Configurator.initialize(null, source);
             Logger logger = LogManager.getLogger(Log4j2Demo.class);

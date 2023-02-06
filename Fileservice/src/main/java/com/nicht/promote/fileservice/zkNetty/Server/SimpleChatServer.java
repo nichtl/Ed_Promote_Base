@@ -30,7 +30,7 @@ public class SimpleChatServer {
                     .childHandler(new SimpleChatServerInitializer())//
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .option(ChannelOption.TCP_NODELAY, Boolean.valueOf(true))
-                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    .option(ChannelOption.SO_KEEPALIVE, true)
                     .childOption(ChannelOption.RCVBUF_ALLOCATOR, new FixedRecvByteBufAllocator(65535));
             System.out.println("netty服务端启动 port"+this.port);
 

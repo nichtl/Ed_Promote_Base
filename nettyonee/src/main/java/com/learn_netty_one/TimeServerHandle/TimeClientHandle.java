@@ -3,6 +3,7 @@ package com.learn_netty_one.TimeServerHandle;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -13,7 +14,6 @@ import java.util.Date;
  */
 public class TimeClientHandle extends ChannelInboundHandlerAdapter {
     private ByteBuf buf;
-
     @Override
     public void handlerAdded(ChannelHandlerContext var1) throws Exception {
          buf = var1.alloc().buffer(4); //

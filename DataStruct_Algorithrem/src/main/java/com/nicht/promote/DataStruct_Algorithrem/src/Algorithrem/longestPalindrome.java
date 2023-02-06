@@ -10,8 +10,8 @@ import java.util.HashMap;
  */
 public class longestPalindrome {
     /**
-     *  a b a b a     i>2
-     *      i
+     *  a b a b a     i>2                              a b c c b a
+     *      i         left=right=i                         i           left = i right=i+1
      * 分别求i为中心的中心扩散(子回文串为奇数的情况)   以及  i与 i+1的中心扩散(字回文串为偶数情况)
      *  Math.max(len1,len2)  // 即以
      *
@@ -37,6 +37,7 @@ public class longestPalindrome {
               int o2 = expandAroundCenter(s,i,i+1);
               int len = Math.max(j1,o2); //如果有更长的 回文串 替换
               if(len > end - start){
+
                   start  =  i -(len-1)/2;
                   end   = i+len/2;
               }
@@ -53,5 +54,7 @@ public class longestPalindrome {
      }
 
 
-
+//    java.lang.IllegalArgumentException: org.I0Itec.zkclient.exception.ZkNoNodeException:
+//    org.apache.zookeeper.KeeperException$NoNodeException:
+//    KeeperErrorCode = NoNode for /pebble_services/com.tuniu.pebble.monitor.log.Collector/consumer/pool/10.41.1.74:54:1665388763798
 }

@@ -1,5 +1,7 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCoder;
 
+import java.util.function.BinaryOperator;
+
 /**
  * 功能描述：
  *
@@ -89,6 +91,10 @@ public class myAtoi {
 
 
     public static void main(String[] args) {
+
+        Integer  i  = 1;
+        int j =1;
+        System.out.println(i.equals(j));
         System.out.println(Integer.MIN_VALUE);
     }
 

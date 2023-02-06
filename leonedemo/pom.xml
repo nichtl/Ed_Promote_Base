@@ -6,7 +6,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.0</version>
-        <relativePath>../fileservice/pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.ed.leone</groupId>
