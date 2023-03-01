@@ -1,7 +1,9 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCoder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 功能描述：
@@ -38,9 +40,15 @@ import java.util.List;
 public class GenerateParenthesis {
     // 右括号一定要比右括号先使用完
     public List<String> generateParenthesis(int n) {
+
+        Map<Integer, Integer> countMap = new HashMap<Integer, Integer>();
+        for (Map.Entry<Integer,Integer> e : countMap.entrySet()){
+            int count =   e.getValue();
+        }
+
         List<String> result = new ArrayList<String>();
         dfs(result,"",n,0,0);
-         return  result;
+        return  result;
     }
 
      void dfs( List<String> parenthesis, String sb,  int n, int l,int r){
@@ -55,9 +63,6 @@ public class GenerateParenthesis {
         }
         dfs(parenthesis, sb+"(", n, l+1, r);
         dfs(parenthesis, sb+")", n, l, r+1);
-
-
-
      }
 
 

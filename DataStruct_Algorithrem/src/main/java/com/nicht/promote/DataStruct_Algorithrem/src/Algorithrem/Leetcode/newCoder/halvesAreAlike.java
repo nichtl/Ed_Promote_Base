@@ -54,7 +54,7 @@ public class halvesAreAlike {
 
         for (int i = 0; i < s.length()/2; i++) {
             if(  yy[ s.charAt(i)] ==1 ){lc++;}
-            if(yy[s.charAt(i+s.length()/2)] ==1 ){rc++;}
+            if(yy[s.charAt( i+ (s.length()/2)) ] ==1 ){rc++;}
         }
         return  lc==rc;
     }

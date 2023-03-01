@@ -80,7 +80,5 @@ public class areSentencesSimilar {
            while (r<n-l && arr1[n-r-1].equals(arr2[m-r-1])){r++;}
 
            return  l+r==n;
-
-
     }
 }
