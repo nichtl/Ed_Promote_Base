@@ -1,5 +1,6 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Reflection.ParameterizedType;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.PriorityQueue;
 
 
@@ -13,10 +14,10 @@ public class ParameterizedTypeRef {
     public static void main(String[] args) {
         PriorityQueue o = new PriorityQueue();
     }
-   /*  ParameterizedType 利用ParameterizedType实现反射修改List<String> 泛型类型
-   重写ParameterizedTypeImpl
+   /*
+    ParameterizedType 利用ParameterizedType实现反射修改List<String> 泛型类型
+    重写ParameterizedTypeImpl
     新增transform (Type oldtype ,Type newtype)*/   /*实现见*/
-
 
 
 

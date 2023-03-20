@@ -8,7 +8,6 @@ import org.objectweb.asm.ClassVisitor;
  */
 public class Asm_1 {
 
-     ClassVisitor classVisitor = new ClassVisitor();
 
 
 
