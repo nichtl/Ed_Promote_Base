@@ -63,8 +63,32 @@ package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCod
  * @Date 2023/2/13
  */
 public class balancedString {
+    public static void main(String[] args) {
+     minimumRecolors("WBBWWBBWBW",7);
 
+    }
 
+    public static int minimumRecolors(String blocks, int k) {
+        int cnt = 0;
+        for (int i = 0; i < k; ++i) {
+            cnt += blocks.charAt(i) == 'W' ? 1 : 0;
+        }
+        int ans = cnt;
+        for (int i = k; i < blocks.length(); ++i) {
+            cnt += blocks.charAt(i) == 'W' ? 1 : 0;
+            cnt -= blocks.charAt(i - k) == 'W' ? 1 : 0;
+            ans = Math.min(ans, cnt);
+        }
+        return ans;
+    }
+
+//    public int balancedString(String s) {
+//      int n  = s.length()/4;
+//
+//
+//
+//
+//    }
 
 
 
