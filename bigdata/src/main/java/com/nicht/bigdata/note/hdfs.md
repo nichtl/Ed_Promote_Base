@@ -5,7 +5,7 @@ nameNode（nn） 存储和管理所有真实数据的元数据（文件名称 �
 
 **dataNode(dn)**</br>
 `存储真实的数据块默认的块大小是128m  
-一个 200M数据存储到hdfs会分为两块 一个 128m 一个 72m`
+一个 200M数据存储到hdfs会分为两块 一 个 128m 一个 72m`
 
 **secondaryNameNode(2n) **</br>
 `用于辅助namenode工作减轻namenode压力`

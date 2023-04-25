@@ -14,7 +14,7 @@ public class nine_deadlock {
        * 因此我们举个例子来描述，如果此时有一个线程A，按照先锁a再获得锁b的的顺序获得锁
        * 而在此同时又有另外一个线程B，按照先锁b再锁a的顺序获得锁。如下图所示
        * */
-      /*https://blog.csdn.net/hd12370/article/details/82814348
+      /* https://blog.csdn.net/hd12370/article/details/82814348
       * */
       /**
        * 产生死锁的原因？
