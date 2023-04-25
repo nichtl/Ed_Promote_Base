@@ -24,6 +24,7 @@ public class Log4j2Demo {
             BufferedInputStream in = new BufferedInputStream(resource.getStream());
             final ConfigurationSource source = new ConfigurationSource(in);
             Configurator.initialize(null, source);
+
             Logger logger = LogManager.getLogger(Log4j2Demo.class);
             String username="${java:os}";
             logger.info("Hello, {}",username);
