@@ -1,5 +1,8 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -25,9 +28,17 @@ public class test {
         ts.add("1"); ts.add("2"); ts.add("3"); ts.add("4"); ts.add("5");
 
 
-        System.out.println(get(ts));
+       // System.out.println(get(ts));
+        Date start  = DateUtil.parse("2023-04-27 09:30:00", DatePattern.NORM_DATETIME_PATTERN);
+        Date end = DateUtil.parse("2023-04-27 09:32:00",DatePattern.NORM_DATETIME_PATTERN);
+        long min = DateUtil.between(start, end,DateUnit.MINUTE);
+        System.out.println(min);
+
+
+
 
     }
+
     public static boolean get(List<String> list){
         boolean linksByteLenIsLegal = true;
         for (String  t:list) {
