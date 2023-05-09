@@ -3,8 +3,6 @@ package com.nicht.hadoop01;
 import com.nicht.hadoop01.constant.HadoopConstant;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
 
@@ -14,7 +12,6 @@ import java.net.URI;
  */
 public class HadoopUtils {
 
-    private static Logger logger = LogManager.getLogger(HadoopUtils.class);
 
 
 
@@ -26,7 +23,7 @@ public class HadoopUtils {
             conf.set("dfs.replication","3");
             fs = FileSystem.get(url,conf,HadoopConstant.user);
         }catch(Exception e){
-            logger.error("Failed create fileSystem for = {}",e.getMessage());
+            //logger.error("Failed create fileSystem for = {}",e.getMessage());
             fs = null;
         }
         return  fs;
@@ -40,7 +37,7 @@ public class HadoopUtils {
             conf.set("dfs.replication","3");
             fs = FileSystem.get(url,conf,HadoopConstant.user);
         }catch(Exception e){
-            logger.error("Failed create fileSystem for = {}",e.getMessage());
+           // logger.error("Failed create fileSystem for = {}",e.getMessage());
             fs = null;
         }
         return  fs;

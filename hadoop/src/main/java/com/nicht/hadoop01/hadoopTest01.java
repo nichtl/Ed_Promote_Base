@@ -7,8 +7,8 @@ import org.apache.hadoop.fs.FileSystem;
 import java.net.URI;
 
 import org.apache.hadoop.fs.Path;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * @Description
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.LogManager;
 public class hadoopTest01 {
 
 
-    private static  Logger logger = LogManager.getLogger(hadoopTest01.class);
+    private static Logger logger = LogManager.getLogger(hadoopTest01.class);
 
     public static void main(String[] args) throws Exception {
         logger.error("hadoop test");

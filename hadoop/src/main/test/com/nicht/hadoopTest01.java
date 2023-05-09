@@ -1,11 +1,19 @@
 package com.nicht;
 
 import com.nicht.hadoop01.HadoopUtils;
-import lombok.extern.slf4j.Slf4j;
+import com.nicht.hadoop01.dto.FlowBean;
+import com.nicht.hadoop01.mr.telCount.FlowDrive;
+import com.nicht.hadoop01.mr.telCount.FlowMapper;
+import com.nicht.hadoop01.mr.telCount.FlowReduce;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +22,7 @@ import java.io.IOException;
  * @Description
  * @Date 2023/4/18
  */
-@Slf4j
+
 public class hadoopTest01 {
 
 
@@ -83,6 +91,28 @@ public class hadoopTest01 {
     }
 
 
+    @Test
+    public void testFlow() throws Exception {
+        Configuration conf = new Configuration();
+
+        Job job =  Job.getInstance(conf);
+
+        job.setJarByClass(FlowDrive.class);
+        job.setMapperClass(FlowMapper.class);
+        job.setReducerClass(FlowReduce.class);
+
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(FlowBean.class);
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(FlowBean.class);
+
+
+        FileInputFormat.setInputPaths(job,new Path("/Users/xujian8/Downloads/flow.txt"));
+        FileOutputFormat.setOutputPath(job,new Path("/Users/xujian8/Downloads/flowcount1"));
+        // 提交
+        job.waitForCompletion(true);
+    }
 
 
 
