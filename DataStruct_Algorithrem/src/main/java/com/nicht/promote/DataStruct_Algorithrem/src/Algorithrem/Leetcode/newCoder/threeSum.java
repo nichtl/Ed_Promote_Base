@@ -29,8 +29,8 @@ public class threeSum {
                 int r = nums[i] + nums[leftIndex] + nums[rightIndex];
                 if( r == 0  ){
                     result.add( Arrays.asList(nums[i] , nums[leftIndex] , nums[rightIndex]));
-                    leftIndex++;
-                    rightIndex--;
+                    while (leftIndex<rightIndex && nums[rightIndex] == nums[--rightIndex]);
+                    while (leftIndex<rightIndex && nums[leftIndex] == nums[++leftIndex]);
                 }
 
                 if(r >0){
