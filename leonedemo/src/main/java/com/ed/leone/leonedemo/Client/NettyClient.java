@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 @Data
 @Slf4j
 public class NettyClient  implements Runnable{
-    static final String HOST = "192.168.5.238";
+    static final String HOST = "127.0.0.1";
     static final int PORT = 10998;
     static final int SIZE = 256;
 
