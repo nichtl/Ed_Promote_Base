@@ -47,17 +47,20 @@ import java.util.HashMap;
  */
 
 public class smallestRepunitDivByK {
+    public static void main(String[] args) {
+        smallestRepunitDivByK(3);
+    }
 
 
 
 
-
-    public int smallestRepunitDivByK(int k) {
+    public static  int smallestRepunitDivByK(int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
         int result = 1 % k , len=1;
         map.put(result,result);
         while(result!=0){
             result =( (result *10)+1 ) %k;
+            System.out.println(result);
             len++;
             if(map.containsKey(result)) {return  -1;}
             map.put(result,result);

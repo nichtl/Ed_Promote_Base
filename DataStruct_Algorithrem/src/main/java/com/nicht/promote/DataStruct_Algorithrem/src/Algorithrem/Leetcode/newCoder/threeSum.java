@@ -31,9 +31,7 @@ public class threeSum {
                     result.add( Arrays.asList(nums[i] , nums[leftIndex] , nums[rightIndex]));
                     while (leftIndex<rightIndex && nums[rightIndex] == nums[--rightIndex]);
                     while (leftIndex<rightIndex && nums[leftIndex] == nums[++leftIndex]);
-                }
-
-                if(r >0){
+                }else if(r >0){
                     rightIndex--;
                 }else {
                     leftIndex++;

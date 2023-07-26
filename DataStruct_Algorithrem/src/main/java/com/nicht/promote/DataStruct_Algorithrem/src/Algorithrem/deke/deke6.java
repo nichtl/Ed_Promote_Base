@@ -31,6 +31,11 @@ public class deke6 {
      说明
        根据ASCII码值排序，第三个ASCII码值的字母为F
        F在字符串中位置索引为5(0为字符串的第一个字母位置索引)
+
+       create table dept_partition_by( deptno int ,dname string) partition by(loc int)  row format delimited fields terminated by '\t';
+
+       create table stu_bucket (id int , name string) clustered by (id) into 4 bucket row format delimited fields terminated by '\t';
+
 */
     public static void main(String[] args) {
       String  str = "AbCdeFG";

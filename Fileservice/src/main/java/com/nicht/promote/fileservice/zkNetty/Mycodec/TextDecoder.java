@@ -47,6 +47,7 @@ public class TextDecoder extends ByteToMessageDecoder {
                 System.out.println("无效数据舍弃"+ByteUtils.trimnull(new String(msg)));
                 return;
         }
+
         byteBuf.resetReaderIndex();
         byteBuf.markReaderIndex();
         CodecParserUtils.ParserPublicData(byteBuf,watchBeans);
