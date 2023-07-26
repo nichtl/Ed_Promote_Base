@@ -63,7 +63,6 @@ public class CopyRandomList {
 // 0 <= n <= 1000
 // -10⁴ <= Node.val <= 10⁴
 // Node.random 为 null 或指向链表中的节点。
-//
 // Related Topics 哈希表 链表 👍 969 👎 0
 
 

@@ -89,8 +89,6 @@ public class binarySearch {
             if(v>len){ res.add(k); }
         });
         return  res;
-
-
     }
 
     public static boolean searchMatrix(int[][] matrix, int target) {

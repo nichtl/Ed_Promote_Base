@@ -26,7 +26,7 @@ public class zkClient {
          */
         //1、创建zk链接
 
-        ZkClient zkClient = new ZkClient(ADDRES, TIMAOUT);
+        ZkClient zkClient = new ZkClient(ADDRES,TIMAOUT);
 //        ZooKeeper zooKeeper = new ZooKeeper(ADDRES, TIMAOUT, new Watcher() {
 //            @Override
 //            public void process(WatchedEvent watchedEvent) {
@@ -63,8 +63,12 @@ public class zkClient {
 //                 System.out.println(watchedEvent.getState().toString());;
 //             }
 //         }, new Stat());
-    List<String> os = zkClient.getChildren("/test");
-    System.out.println(1 );
+        String  a = zkClient.create("/test/one","{\"ip\":10.10.8.1,\"port\":\"1001\"}",CreateMode.PERSISTENT);
+        List<String>  data  =zkClient.getChildren("/");
+        String s = zkClient.readData("/test/one");
+        //zkClient.process(new WatchedEvent(Watcher.Event.EventType.NodeChildrenChanged));
+        System.out.println(s);
+        System.out.println(data);
 
     }
 }

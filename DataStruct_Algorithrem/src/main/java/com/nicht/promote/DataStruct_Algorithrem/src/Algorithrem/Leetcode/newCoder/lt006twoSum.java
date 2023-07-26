@@ -18,7 +18,7 @@ public class lt006twoSum {
 
 
 
-
+ return  new int[]{};
 
     }
 }
