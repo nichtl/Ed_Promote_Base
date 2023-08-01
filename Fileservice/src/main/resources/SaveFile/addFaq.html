@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>新增问答对</title>
+    <!-- 本地测试-->
+    <#--    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+    <#--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>-->
+    <#--    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"/></script>-->
+    <#--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+    <#--    <script type="text/javascript" src="/muses-web-site/js/tinymce/icons/default/icons.min.js"></script>-->
+    <#--    <script type="text/javascript" src="/muses-web-site/js/tinymce/tinymce.min.js"></script>-->
+
+
+
+    <!-- 发布环境 -->
+    <script type="text/javascript" src="/muses-web-site/js/lib/vue2.6.12.min.js"></script>
+    <script type="text/javascript" src="/muses-web-site/js/faq/element_2.15.9_index.js"></script>
+    <script type="text/javascript" src="/muses-web-site/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="/muses-web-site/js/tinymce/icons/default/icons.min.js"></script>
+    <link rel="stylesheet" href="/muses-web-site/js/faq/element_2.15.9_index.css"/>
+    <script type="text/javascript" src="/muses-web-site/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/script/lib/jquery.min.js"></script>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <meta name="_csrf" content="3a0c4c66-7d59-4ee1-b21c-39766a476012"/>
+    <meta name="_csrf_header" content="3a0c4c66-7d59-4ee1-b21c-39766a476012"/>
+    <script type="text/javascript">
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                if(header && token ){
+                    xhr.setRequestHeader(header, token);
+                }
+            }
+        });
+        // 页面整体加载好后form插入csrf_token
+        $(function(){
+            setTimeout(function(){
+                updateForms();
+            },100)
+        })
+
+
+
+        function updateForms() {
+            // 得到页面中所有的 form 元素
+            var forms = document.getElementsByTagName('form');
+            for(i=0; i<forms.length; i++) {
+                // var url = forms[i].action;
+
+                // 如果这个 form 的 action 值为空，则不附加 csrftoken
+                // if(url == null || url == "" ) continue;
+
+                // 动态生成 input 元素，加入到 form 之后
+                var e = document.createElement("input");
+                e.name = "_csrf";
+                <#--e.value = "${_csrf.token}";-->
+                e.value = "3a0c4c66-7d59-4ee1-b21c-39766a476012";
+                e.type="hidden";
+                forms[i].appendChild(e);
+            }
+        }
+    </script>
+
+    <style>
+
+        .el-input-group__append{
+            color: #FFF;
+            background-color: #F56C6C;
+            border-color: #F56C6C
+        }
+
+        .container {
+            background-color: #FFF;
+            margin-top: 3.75rem;
+        }
+        .notify-offset{
+            margin-top: 3.125rem;
+        }
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container" class="container"  v-cloak>
+    <el-main>
+        <el-form  :model="addForm" :rules="addFormRules" ref="addForm">
+            <el-form-item label="问答对归属类型"  >
+                <el-select  v-model="addForm.qapType"  placeholder="请选择">
+                    <el-option
+                            v-for="item in qapTypeOption"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+                <span v-show="addForm.qapType==2">
+                    <el-select  v-model="addForm.resourceId"  placeholder="请选择问答对归属的资源类型">
+                        <el-option
+                                v-for="item in resourceOption"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </span>
+                <span>
+                    <el-tooltip class="item"  effect="dark" content="为了区分faq数据,不同Faq的类型存到不同表里。 目前存在app在线客服对客的用户侧faq 还有公司内部客服与供应商进行沟通时的客服供应商侧faq  " placement="bottom">
+                     <i class="el-icon-question"></i>
+                    </el-tooltip>
+				</span>
+            </el-form-item>
+
+            <el-form-item label="绑定二级菜单" prop="categoryId" >
+                <el-cascader size="medium" :props="cascaderProps"   v-model.number="addForm.categoryId" @change="addMenusChange" :options="formMenus"  clearable></el-cascader>
+                <span>
+							<el-tooltip class="item"  effect="dark" content="问答对只能绑定到二级菜单下,只有绑定了机器人或技能的菜单才会出现在这里,找不到绑定的菜单请到绑定菜单绑定机器人" placement="bottom">
+							 <i class="el-icon-question"></i>
+							</el-tooltip>
+				</span>
+            </el-form-item>
+            <el-form-item label="问题排序序号">
+                <el-input-number v-model="addForm.sort" size="small" controls-position="right" :min="-1" >排序</el-input-number>
+                <span>
+                    <el-tooltip class="item"  effect="dark" content="-1 代表使用默认递增序号 数字越小优先级越高 按正序排序 " placement="bottom">
+                     <i class="el-icon-question"></i>
+                    </el-tooltip>
+				</span>
+            </el-form-item>
+            <el-form-item label="问题" prop="question" >
+                <el-switch
+                        v-model="addForm.recommend"
+                        active-text="推荐问题"
+                        inactive-text="非推荐问题">
+                </el-switch>
+
+                <el-input  type="textarea"   maxlength="50" show-word-limit :rows="1"
+                           placeholder="请输入问题" v-model="addForm.question" autocomplete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item label="相似问题"  prop="similarProblem" >
+                <el-button type="primary" size="small" @click="addInput" plain>新增输入框<i class="el-icon-circle-plus-outline el-icon--right"></i></el-button>
+                <div v-for="(item,index) in addForm.similarProblem" :key="item.id">
+                    <el-input
+                            type="input"
+                            placeholder="请填写相似问题"
+                            v-model="item.data">
+                        <el-button type="danger"  slot="append"  @click="deleteInput(item,index)" icon="el-icon-delete"></el-button>
+                    </el-input>
+                </div>
+            </el-form-item>
+
+            <el-form-item label="关联问题" prop="associationQuestion">
+
+                <el-popover
+                        @show="initSelection"
+                        placement="right"
+                        width="600"
+                        trigger="click">
+                    <template >
+                        <el-row>
+                            <span v-show="addForm.qapType==2">
+                                    <el-select  v-model="addForm.resourceId"  placeholder="请选择问答对归属的资源类型">
+                                        <el-option
+                                                v-for="item in resourceOption"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                            </span>
+                            <span v-show="addForm.qapType==1" >
+                                 <el-cascader    size="medium"  :props="cascaderProps"   v-model.number="selectionCategoryId"  :options="formMenus"  clearable></el-cascader>
+                            </span>
+
+                            <el-input          style="width: 200px"  placeholder="请输入问题" v-model="searchQuestion" ></el-input>
+                            <el-button   type="primary" @click="searchList" icon="el-icon-search" plain>查询</el-button>
+                        </el-row>
+                        <el-main>
+                            <el-table
+                                    ref="questionTable"
+                                    @selection-change="handleSelectionChange"
+                                    :data="questionData">
+                                <el-table-column
+                                        type="selection"
+                                        width="55">
+                                </el-table-column>
+                                <el-table-column width="200" property="question" label="问题"></el-table-column>
+                            </el-table>
+
+                            <el-pagination
+                                    small
+                                    background
+                                    prev-text="上一页"
+                                    next-text="下一页"
+                                    @size-change="handleSizeChange"
+                                    @current-change="handleCurrentChange"
+                                    :page-sizes="pageSizes"
+                                    :page-size="pageSize"
+                                    layout="->, prev, pager, next,total,sizes"
+                                    :total="totalCount">
+                            </el-pagination>
+
+                        </el-main>
+                        <div>
+                            <el-button @click="confirmSelection()">确定关联</el-button>
+                            <el-button @click="toggleSelection()">取消关联</el-button>
+                        </div>
+                    </template>
+                    <el-button slot="reference">选择关联问题</el-button>
+                </el-popover>
+
+                <div v-for="(item,index) in addForm.associationQuestion" :key="item.categoryId">
+                    <el-input
+                            type="text"
+                            disabled
+                            v-model="item.question" >
+                        <el-button type="danger"  slot="append"  @click="deleteAssociationQuestion(item,index)" icon="el-icon-delete"></el-button>
+                    </el-input>
+                </div>
+            </el-form-item>
+
+
+
+
+            <el-form-item label="关键字" >
+                <el-select  v-model="tagKeyWord"  @change="getCheckedLabel" multiple placeholder="请选择">
+                    <el-option
+                            v-for="item in skillTagOptions"
+                            :key="item.tagId"
+                            :label="item.tagName"
+                            :value="item.tagId">
+                    </el-option>
+                </el-select>
+                <el-popover
+                        placement="right"
+                        width="200"
+                        trigger="click"
+                        v-model="visible">
+                    <el-input
+                            type="input"
+                            placeholder="请填写标签"
+                            v-model="skillTagName"></el-button>
+                    </el-input>
+                    <div style="text-align: right; margin: 0">
+                        <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+                        <el-button type="primary" size="mini" @click="addSkillTags">确定</el-button>
+                    </div>
+                    <el-button slot="reference">新增标签</el-button>
+                </el-popover>
+            </el-form-item>
+
+
+            <el-form-item label="动态答案" prop="dynamicAnswerFlag" >
+                <el-switch v-model="addForm.dynamicAnswerFlag"  active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+            </el-form-item>
+
+            <el-form-item label="答案" prop="answer" >
+            </el-form-item>
+            <div id = "tinymceArea"></div>
+            <el-divider ></el-divider>
+            <div  v-show="addForm.dynamicAnswerFlag">
+                <el-form-item label="动态答案" >
+                    <el-button @click="console">console</el-button>
+                </el-form-item>
+                <div  id = "dynamiceTinymceArea"></div>
+            </div>
+
+
+            <el-form-item label="提交" prop="answer" >
+                <el-button type="primary" @click="submitConfirm">确 定</el-button>
+            </el-form-item>
+        </el-form>
+
+
+    </el-main>
+
+    <el-dialog
+            title="引用变量"
+            :visible.sync="outParamDialogVisible"
+            width="60%">
+
+        <el-form>
+            <el-form-item label="接口出参">
+                <el-cascader  ref="outParamCasCader" v-model="outParamCheckedOptions"
+                              :props="contextOptionProps" :options="outParamOptions">
+                </el-cascader>
+            </el-form-item>
+            <el-form-item label="中文描述" >
+                <el-input v-model="dynamicOutparamDesc"></el-input>
+            </el-form-item>
+        </el-form>
+
+        <span slot="footer" class="dialog-footer">
+			    <el-button @click="closeOutParamDialog">取 消</el-button>
+			    <el-button type="primary" @click="insertDynamicVisible">确 定</el-button>
+		</span>
+    </el-dialog>
+</div>
+<script type="application/javascript">
+    const app = new Vue({
+        el: "#container",
+        data() {
+            let that = this;
+            return {
+                searchQuestion:'',
+                cascaderProps:{
+                    emitPath:false,
+                    checkStrictly:true,
+                    label:'name',
+                    value:'id',
+                    children: 'children'
+                },
+                formMenus:[],
+                questionData:[],
+                tagKeyWord:[],
+                qapTypeOption:[
+                    {value:1, label:'app用户侧'},
+                    {value:2, label:'客服供应商侧'}
+                ],
+                resourceOption:[
+                    {value:27, label:'跟团'},
+                    {value:7, label:'机票'},
+                    {value:18, label:'附加项目'},
+                    {value:30, label:'汽车票'},
+                    {value:2, label:'酒店'},
+                    {value:13, label:'餐饮'},
+                    {value:16, label:'车队'},
+                    {value:103, label:'团队酒店'},
+                    {value:13, label:'餐饮'},
+                    {value:26, label:'邮轮'},
+                    {value:14, label:'签证'}
+                ],
+                addForm:{
+                    sort:-1,
+                    // 是否为推荐问题
+                    recommend:false,
+                    //关联问题id数组
+                    associationQuestion:[],
+                    categoryId:'',
+                    question:'',
+                    answer:'',
+                    dynamicAnswer:'',
+                    dynamicAnswerFlag:false,
+                    faqKeyword:[],
+                    similarProblem:[
+                        {id:0, data:''}
+                    ],
+                    resourceId:'',
+                    qapType:1
+                },
+                selectionCategoryId:0,
+                pageSizes:[10,30,50,100],
+                pageNum: 1 ,
+                pageSize:10 ,
+                totalCount: 0,
+                multipleSelection: [],
+                similarProblemCounter: 0,
+                addFormRules:{
+                    question: [
+                        { required: true, message: '请填写问题', trigger: 'blur' }
+                    ],
+                    answer: [
+                        { required: true, message: '请填写答案', trigger: 'blur' }
+                    ],
+                    categoryId:[
+                        { required: true, message: '请选择所属二级菜单' }
+                    ]
+                },
+                skillTagOptions:[
+                ],
+                skillTagName:'',
+                visible:false,
+                editor:'',
+                outParamDialogVisible:false,
+                outParamOptions: [],
+                outParamCheckedOptions:[],
+                dynamicOutparamDesc:'',
+
+                contextOptionProps:{
+                    lazy: true,
+                    lazyLoad(node, resolve){
+
+                        console.log("1112");
+                        let param = {
+                            level:node.level,
+                            id: node.value
+                        }
+
+                        $.ajax({
+                            url : "/muses-web-site/unit/parameter/nextOption.htm",
+                            type:'post',
+                            dataType:'json',
+                            data:JSON.stringify(param),
+                            contentType: 'application/json; charset=utf-8',
+                            success:  (data) =>{
+                                console.log(data)
+                                if(data.success===true) {
+                                    if(data.data ==null || data.data.length==0) {
+                                        that.$set(node,'disabled',true);
+                                        return;
+                                    }else{
+                                        resolve(data.data )
+                                    }
+
+                                }else{
+                                    that.$notify({
+                                        type:'error',
+                                        title: '错误',
+                                        message: '查询数据失败'+data.msg,
+                                        customClass: 'notify-offset',
+                                        position: 'top-left'
+                                    });
+                                }
+                            },
+                            error:(xhr, textStatus, errorThrown)=>{
+                                that.$notify({
+                                    tyep:'error',
+                                    title: '错误',
+                                    message: '查询数据失败',
+                                    customClass: 'notify-offset',
+                                    position: 'top-left'
+                                });
+                            }
+                        });
+
+
+                    }
+                },
+                notifyPromise: Promise.resolve()
+
+            }
+
+        },
+        methods: {
+            dealMenus(data){
+                // 问答对只能绑定到 二级菜单下 禁用一级菜单
+                data.forEach(item =>{
+                    if(item.level ===1){
+                        this.$set(item,'disabled',true);
+                    }else{
+                        this.$set(item,'disabled',false);
+                    }
+                    if(item.children){
+                        this.dealMenus(item.children)
+                    }
+                });
+                return data;
+            },
+            initMenu(){
+                // 初始化 已经绑定菜单数据
+                $.ajax({
+                    url : "/muses-web-site/unit/queryFaqMenu.htm",
+                    type:'post',
+                    dataType:'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({"filterType": "2"}),
+                    success:  (data) => {
+
+                        if(data.success===true) {
+                            this.formMenus = this.dealMenus(data.data);
+                        }
+                    },
+                    error:(xhr, textStatus, errorThrown)=>{
+                        this.$notify.error({
+                            title: '错误',
+                            message: '获取绑定菜单数据失败',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                    }
+                });
+            },
+            dynamiceTinyMceInit(){
+                let that = this;
+                tinymce.init({
+                    selector: '#dynamiceTinymceArea',
+                    language:'zh_CN',
+                    menubar: 'file edit insert view format table tools help custom',
+                    menu: {
+                        custom: { title: '插入变量', items: 'basicitem' }
+                    },
+                    extended_valid_elements : 'span[*],',
+                    plugins: ' image   preview searchreplace autolink directionality visualblocks visualchars fullscreen  link media template code codesample table charmap  pagebreak nonbreaking anchor insertdatetime advlist lists wordcount   help emoticons autosave noneditable',
+                    toolbar: ' image | code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | table  media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs',
+                    height: 650, //编辑器高度
+                    min_height: 400,
+                    fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
+                    font_formats: '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',
+                    setup: function (editor) {
+                        editor.ui.registry.addMenuItem('basicitem', {
+                            text: '选择变量',
+                            onAction: function () {
+                                that.openOutParamDialog(editor);
+                            }
+                        });
+                    },
+                    images_upload_handler:  (blobInfo, success, failure) =>{
+                        var xhr, formData;
+                        xhr = new XMLHttpRequest();
+                        xhr.withCredentials = false;
+                        xhr.open('POST', '/muses-web-site/unit/upload.htm');
+
+                        xhr.onload = function() {
+                            var json;
+                            if (xhr.status == 403) {
+                                failure('HTTP Error: ' + xhr.status, { remove: true });
+                                return;
+                            }
+                            if (xhr.status < 200 || xhr.status >= 300 ) {
+                                failure('HTTP Error: ' + xhr.status);
+                                return;
+                            }
+                            json = JSON.parse(xhr.responseText);
+                            if (!json || typeof json.location != 'string') {
+
+                                failure('Invalid JSON: ' + xhr.responseText);
+                                this.$notify({
+                                    title: '图片上传失败',
+                                    message: '图片上传失败',
+                                    type: 'error',
+                                    customClass: 'notify-offset',
+                                    position: 'top-left'
+                                });
+                                return;
+                            }
+                            success(json.location);
+                        };
+
+                        xhr.onerror = function () {
+                            failure('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                        }
+                        formData = new FormData();
+                        formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                        xhr.send(formData);
+                    }
+                });
+            },
+            tinyMceInit(){
+                let that = this;
+                tinymce.init({
+                    selector: '#tinymceArea',
+                    language:'zh_CN',
+                    plugins: ' image   preview searchreplace autolink directionality visualblocks visualchars fullscreen  link media template code codesample table charmap  pagebreak nonbreaking anchor insertdatetime advlist lists wordcount   help emoticons autosave noneditable',
+                    toolbar: ' image | code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | table  media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs',
+                    height: 650, //编辑器高度
+                    min_height: 400,
+                    fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
+                    font_formats: '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',
+                    images_upload_handler:  (blobInfo, success, failure) =>{
+                        var xhr, formData;
+                        xhr = new XMLHttpRequest();
+                        xhr.withCredentials = false;
+                        xhr.open('POST', '/muses-web-site/unit/upload.htm');
+
+                        xhr.onload = function() {
+                            var json;
+                            if (xhr.status == 403) {
+                                failure('HTTP Error: ' + xhr.status, { remove: true });
+                                return;
+                            }
+                            if (xhr.status < 200 || xhr.status >= 300 ) {
+                                failure('HTTP Error: ' + xhr.status);
+                                return;
+                            }
+                            json = JSON.parse(xhr.responseText);
+                            if (!json || typeof json.location != 'string') {
+
+                                failure('Invalid JSON: ' + xhr.responseText);
+                                this.$notify({
+                                    title: '图片上传失败',
+                                    message: '图片上传失败',
+                                    type: 'error',
+                                    customClass: 'notify-offset',
+                                    position: 'top-left'
+                                });
+                                return;
+                            }
+                            success(json.location);
+                        };
+
+                        xhr.onerror = function () {
+                            failure('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                        }
+                        formData = new FormData();
+                        formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                        xhr.send(formData);
+                    }
+                });
+            },
+            addMenusChange(val){
+                if(typeof val == 'undefined'|| val ==null || val ==0 ){return ;}
+                if(val>0){
+                    this.initSkillTags(val);
+                    //this.searchList();
+                }
+            },
+            submitAddForm(){
+
+
+                $.ajax({
+                    url : "/muses-web-site/unit/question.htm",
+                    type:'post',
+                    dataType:'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data:JSON.stringify(this.addForm),
+                    success : (value) => {
+                        if(value.success === true) {
+                            this.$notify({
+                                title: '成功',
+                                message: '新增成功',
+                                type: 'success',
+                                customClass: 'notify-offset',
+                                position: 'top-left'
+                            });
+                        }else{
+                            this.$notify({
+                                title: '失败',
+                                message: '提交失败'+value.msg,
+                                type: 'error',
+                                customClass: 'notify-offset',
+                                position: 'top-left'
+                            });
+                        }
+                    },
+                    error:(xhr, textStatus, errorThrown)=>{
+                        this.$notify({
+                            title: '失败',
+                            message: '提交失败',
+                            type: 'error',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                    }
+                });
+            },
+            submitConfirm(){
+                this.$confirm('您确定提交问答对吗?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.addQuestion('addForm')
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+            },
+            addQuestion(formname){
+                this.addForm.answer = tinyMCE.get('tinymceArea').getContent({format : 'raw'});
+                this.addForm.dynamicAnswer = tinyMCE.get('dynamiceTinymceArea').getContent({format : 'raw'});
+                this.getCheckedLabel();
+                if(this.addForm.qapType==2 && this.addForm.resourceId==''){
+                    this.$notify.error("当问答对类型为 客服供应商侧时,必须选择资源类型")
+                    return;
+                }
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.submitAddForm();
+                    } else {
+                        this.$notify.error({
+                            title: '错误',
+                            message: '参数校验失败,请检查填写内容',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                        return false;
+                    }
+                });
+
+            },
+            deleteInput(item,index){
+                if(this.addForm.similarProblem.length<=1){//如果只有一个输入框则不可以删除
+                    this.$notify({
+                        title: '删除失败',
+                        message: '只有一个输入框时无法删除',
+                        type: 'warning',
+                        customClass: 'notify-offset',
+                        position: 'top-left'
+                    });
+                    return false
+                }
+                this.addForm.similarProblem.splice(index,1)//删除了数组中对应的数据也就将这个位置的输入框删除
+            },
+            addInput(){
+                if (this.addForm.similarProblem.length >= 10) {
+                    this.$notify({
+                        title: '新增失败',
+                        message: '最多添加10个相似问题',
+                        type: 'warning',
+                        customClass: 'notify-offset',
+                        position: 'top-left'
+                    });
+                    return false
+                }
+                this.addForm.similarProblem.push(//增加就push进数组一个新值
+                    {
+                        id:this.similarProblemCounter++,
+                        data:''
+                    }
+                )
+            },
+            handleSelectionChange(val){
+                if (val.length > 30) {
+                    this.$notify({
+                        title: '关联失败',
+                        message: '最多关联30个问题',
+                        type: 'warning',
+                        customClass: 'notify-offset',
+                        position: 'top-left'
+                    });
+                    return false
+                }
+
+                this.multipleSelection = val
+            },
+            confirmSelection(){
+
+
+                for (let i=0;i<this.multipleSelection.length;i++){
+                    let tmpcategoryId = this.multipleSelection[i].id
+                    let exist = this.addForm.associationQuestion.some(item => item.categoryId === tmpcategoryId);
+
+                    if(!exist){
+                        let modelItem={};
+                        modelItem["categoryId"]=tmpcategoryId;
+                        modelItem["question"]=this.multipleSelection[i].question;
+                        this.addForm.associationQuestion.push(modelItem);
+                    }
+
+                }
+            },
+            initSelection(){
+                this.$refs['questionTable'].clearSelection();
+                this.selectionCategoryId = this.addForm.categoryId;
+                this.searchList();
+            },
+            toggleSelection(){
+                // 取消前先删除选中问题
+                for (let i=0;i<this.multipleSelection.length;i++){
+                    let rmcategoryId = this.multipleSelection[i].id
+                    let elementIndex = this.addForm.associationQuestion.findIndex(item =>item.categoryId === rmcategoryId);
+                    if(elementIndex > -1){
+                        this.addForm.associationQuestion.splice(elementIndex,1);
+                    }
+                }
+                this.$refs['questionTable'].clearSelection();
+
+            },
+            deleteAssociationQuestion(item,index){
+                this.addForm.associationQuestion.splice(index,1)
+
+            },
+            searchList(){
+                $.ajax({
+                    url : "/muses-web-site/unit/queryFaqList.htm",
+                    type:'post',
+                    dataType:'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data:JSON.stringify(
+                        {"categoryId":this.selectionCategoryId,
+                            "pageSize":this.pageSize,
+                            "pageNum":this.pageNum,
+                            "qapType":this.addForm.qapType,
+                            "resourceId":this.addForm.resourceId,
+                            "question":this.searchQuestion}),
+                    success:  (data) =>{
+
+                        if(data.success===true) {
+                            this.totalCount = data.totalCount;
+                            this.questionData  = data.data;
+
+                        }else{
+                            this.$notify.error({
+                                title: '错误',
+                                message: '查询关联数据失败'+data.msg,
+                                customClass: 'notify-offset',
+                                position: 'top-left'
+                            });
+                        }
+                    },
+                    error:(xhr, textStatus, errorThrown)=>{
+                        this.$notify.error({
+                            title: '错误',
+                            message: '查询数据失败',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                    }
+                });
+
+            },
+            handleSizeChange(val) {
+                this.pageSize =val;
+                this.searchList();
+            },
+            handleCurrentChange(val) {
+                this.pageNum = val;
+                this.searchList();
+            },
+            initSkillTags(val){
+                // 二级分类变化时加载技能下标签列表
+                $.ajax({
+                    url : "/muses-web-site/unit/skillTagOptions.htm",
+                    type:'get',
+                    dataType:'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: "categoryId="+val,
+                    success:  (data) => {
+
+                        if(data.success===true) {
+                            this.skillTagOptions = data.unitTagInfos;
+                        }else{
+                            this.$notify.error({
+                                title: '错误',
+                                message: '获取标签数据失败'+data.msg,
+                                customClass: 'notify-offset',
+                                position: 'top-left'
+                            });
+                        }
+                    },
+                    error:(xhr, textStatus, errorThrown)=>{
+                        this.$notify.error({
+                            title: '错误',
+                            message: '获取标签数据失败',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                    }
+                });
+
+
+
+            },
+            addSkillTags(){
+                if(this.addForm.categoryId==='' || typeof  this.addForm.categoryId !== 'number'){
+                    this.$notify({
+                        title: '新增失败',
+                        message: '技能id为空,请先选择绑定了技能的二级菜单',
+                        type: 'warning',
+                        customClass: 'notify-offset',
+                        position: 'top-left'
+                    });
+                    this.skillTagName=''
+                    return false;
+                }
+
+                if(this.skillTagName ==''){
+                    this.$notify({
+                        title: '新增失败',
+                        message: '标签名称为空',
+                        type: 'warning',
+                        customClass: 'notify-offset',
+                        position: 'top-left'
+                    });
+                    this.skillTagName=''
+                    return false;
+                }
+                let existTagName = this.skillTagOptions.some(item => item.tagName == this.skillTagName)
+                if(existTagName){
+                    this.$notify({
+                        title: '新增失败',
+                        message: '标签名称已经存在',
+                        type: 'warning',
+                        customClass: 'notify-offset',
+                        position: 'top-left'
+                    });
+                    return false;
+                }
+                $.ajax({
+                    url : "/muses-web-site/unit/skillTag.htm",
+                    type:'post',
+                    dataType:'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({"categoryId":this.addForm.categoryId,"tagName":this.skillTagName}),
+                    success:  (data) => {
+
+                        if(data.success===true) {
+                            this.$notify({
+                                title: '成功',
+                                message: '新增成功',
+                                type: 'success',
+                                customClass: 'notify-offset',
+                                position: 'top-left'
+                            });
+                            this.initSkillTags(this.addForm.categoryId);
+                        }else{
+                            this.$notify.error({
+                                title: '错误',
+                                message: '新增失败'+data.msg,
+                                customClass: 'notify-offset',
+                                position: 'top-left'
+                            });
+                        }
+                    },
+                    error:(xhr, textStatus, errorThrown)=>{
+                        this.$notify.error({
+                            title: '错误',
+                            message: '新增失败',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                    }
+                });
+            },
+            getCheckedLabel(val){
+
+
+                let value = this.tagKeyWord
+
+                if(typeof value == 'undefined' || value.length == 0){return}
+                let checkedArray = new Array();
+                value.forEach(node => {
+                    let obj = this.skillTagOptions.find(item =>  item.tagId === node);
+                    if(obj){
+                        checkedArray.push(obj);
+                    }
+                });
+
+                this.addForm.faqKeyword =  checkedArray;
+
+
+            },
+            removeCheckedLabel(value){
+                if(typeof value == 'undefined' || value.length == 0){return}
+                let index =this.addForm.faqKeyword.findIndex(item => item.tagId === value);
+                if(index >-1){
+                    this.addForm.faqKeyword.splice(index,1) ;
+                }
+            },
+            openOutParamDialog(ed){
+                this.outParamDialogVisible = true;
+                this.editor = ed;
+            },
+            closeOutParamDialog(ed){
+                this.outParamDialogVisible = false;
+                this.editor = null;
+                this.dynamicOutparamDesc='';
+            },
+            insertDynamicVisible(){
+                if(!this.outParamCheckedOptions && this.outParamCheckedOptions.length==0){
+                    this.notifyPromise.then(() => {
+                        this.$notify.error({
+                            title: '错误',
+                            message: '请选择出参',
+                            customClass: 'notify-offset',
+                            position: 'top-left',
+
+                        });
+                    })
+                    return;
+                }
+                if(this.dynamicOutparamDesc=='') {
+                    this.notifyPromise.then(() => {
+                        this.$notify.error({
+                            title: '错误',
+                            message: '中文描述不能为空',
+                            customClass: 'notify-offset',
+                            position: 'top-left',
+
+                        });
+                    })
+                    return;
+                }
+
+                let pathArr = this.$refs['outParamCasCader'].getCheckedNodes()[0].pathLabels
+                let newArr = this.outParamCheckedOptions.concat()
+                let interfaceId = newArr[0]
+                newArr.splice(0,1)
+                let dynamicOutParamIds = newArr.join(",");
+
+                let dynamicPlaceHolder = '#\{'
+                    + pathArr.join(".")
+                    + '}';
+
+                const param_html = '<span class="mceNonEditable" dynamic_interface_id='
+                    + '"'+interfaceId + '" '
+                    +' dynamic_outparam_ids='
+                    + '"'+dynamicOutParamIds +'"'
+                    + ' dynamic_outparam_desc='
+                    + '"'+this.dynamicOutparamDesc + '"'
+                    + ' dynamic_placeholder='
+                    + '"'+dynamicPlaceHolder +'"'
+                    +'> '
+                    + dynamicPlaceHolder
+                    +'</span>'
+                console.log(param_html)
+                this.editor.insertContent(param_html)
+                this.outParamDialogVisible =false;
+            },
+            console() {
+                console.log(tinyMCE.get('dynamiceTinymceArea').getContent({format : 'raw'}));
+
+            },
+            initInterfaceOption(){
+                $.ajax({
+                    url : "/muses-web-site/unit/interface/options.htm",
+                    type:'get',
+                    dataType:'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success:  (data) => {
+                        console.log(data)
+                        if(data.success == true){
+                            this.outParamOptions = data.data;
+                        }
+
+
+                    },
+                    error:(xhr, textStatus, errorThrown)=>{
+                        console.log(xhr)
+                        console.log(textStatus)
+                        console.log(errorThrown)
+                        this.$notify.error({
+                            title: '错误',
+                            message: '获取数据失败',
+                            customClass: 'notify-offset',
+                            position: 'top-left'
+                        });
+                    }
+                });
+            }
+        },
+        created(){
+            this.tinyMceInit()
+            this.dynamiceTinyMceInit()
+        },
+        beforeMount(){
+
+            this.initMenu();
+            if(this.categoryId === 0){
+                this.categoryId =  this.formMenus[0].children[0].id;
+            }
+            //  init Data
+            this.initInterfaceOption();
+
+        }
+
+
+    });
+</script>
+
+</body>
+</html>
