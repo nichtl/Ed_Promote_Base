@@ -1,0 +1,8 @@
+.idea/*
+bin/*
+log/*
+pkg/*
+main.exe
+*.txt
+*.bat
+*.iml
