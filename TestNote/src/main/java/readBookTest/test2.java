@@ -18,7 +18,7 @@ public class test2 {
     
     public static void main(String[] args) {
 
-        String nextPage = "954065";
+        String nextPage = "954231_2";
         String body = HttpUtil.get("https://m.1qishu.com/du/13/13539/"+nextPage+".html");
 
         org.jsoup.nodes.Document doc = Jsoup.parseBodyFragment(body);

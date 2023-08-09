@@ -1,14 +1,8 @@
-/**
- * Copyright (C) 2006-2017 Tuniu All rights reserved
- */
+
 package com.tuniu.mob.ocsfaq.faq.entity;
 
 import java.util.Date;
 
-/**
- * Date: 2017-05-17
- *
- */
 public class UserBehaviorEntity {
     private Integer id;
     private Integer userId;

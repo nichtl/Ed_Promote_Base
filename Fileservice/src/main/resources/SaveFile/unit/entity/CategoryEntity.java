@@ -1,10 +1,6 @@
 package com.tuniu.mob.ocsfaq.faq.entity;
 
-/**
- * @author fanguotao
- * @create 2015/8/29
- * @description FAQ类别实体
- */
+
 public class CategoryEntity {
     //类别Id
     private Integer id;

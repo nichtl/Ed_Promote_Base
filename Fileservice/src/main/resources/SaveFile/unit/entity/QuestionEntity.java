@@ -1,10 +1,5 @@
 package com.tuniu.mob.ocsfaq.faq.entity;
 
-/**
- * @author fanguotao
- * @create 2015/8/29
- * @description 问题实体类 接入百度unit faq功能 2022-09-05
- */
 public class QuestionEntity {
     //问题Id
     private Integer id;
