@@ -1,6 +1,4 @@
-/**
- * Copyright (C) 2006-2016 Tuniu All rights reserved
- */
+
 package com.tuniu.mob.ocsfaq.faq.entity;
 
 /**

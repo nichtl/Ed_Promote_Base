@@ -128,8 +128,8 @@ public class HiveSQL {
      *   t2.userId,
      *   t2.month,
      *   t2.month_total,
-     *   sum(t2.month_total)  over(partiiton by t2.userId order by t2.month row between unbounded preceding and current row) as
-     * from (
+     *   sum(t2.month_total)  over(partiiton by t2.userId order by t2.month row between unbounded preceding and current row) as curSum
+      * from (
      *   select
      *    t1.userId,
      *    t1.month,
@@ -233,12 +233,24 @@ public class HiveSQL {
     /**
      * 业务域: crm 会员业务 tof 订单业务 mob 在线客服 供应链
      */
+
 /**
- * 项目: crm业务域相关系统(核心系统:会员系统交叉推荐web应用(site),会员档案系统(sun),客服子系统(svr),营销子系统(mkt),会员精准营销子系统(pms),CRM系统短信应用(sms))
+ *  负责业务:crm会员业务域相关系统,mob无线业务域,负责无线底层im系统开发维护.
+ *  项目技术: Spring、SpringMVC、Spring Boot、iBatis、MyBatis、RPC 、Thrift、RabbitMQ、Redis 、Hadoop 、Hive、Hbase
+ *  责任描述:
+ *  负责CRM会员检索维护优化,CRM会员检索基于crm大数据平台实现,
+ *  由业务人员在页面选取取数条件,异步执行hql任务落库数据,由于crm取数维度不断拓展导致hql越发大且杂,
+ *  导致检索任务执行时长增加,按照检索逻辑维度细化拆分条件 将大hql拆分多个hql执行,最终再次聚合数据，降低整体执行时间。
+ *  负责crm机器人外呼相关业务维护,实现从创建外呼任务管理到外呼后根据对话意图分发人工任务项,自动添加企微等流程串联,
+ *  长期参与crm自动化场景开发,对接业务及BI,实现业务营销场景多渠道推送,参与crm场景营销渠道统一改造,对接决策中心,实现crm营销业务收口及管控,
+ *  参与订单让价改造及额度管理相关功能开发,负责让价金额计算,
+ *  负责在线客服维护迭代,负责在线客服FAQ后台管理页面及功能重构,独立搭建动态FAQ回答功能,使得FAQ答案可配置内部业务接口,实现FAQ答案灵活对接内部业务信息.
+ *  对接百度机器人,实现机器人对话,负责在线客服对接公司内部基于rasa chatGpt 实现的对话机器人,接入im对话流程.实现智能客服应答。
  *
- * 责任描述:  参与crm自动化场景开发,
- *
- **/
+ * **/
+
+
+
 
 
 

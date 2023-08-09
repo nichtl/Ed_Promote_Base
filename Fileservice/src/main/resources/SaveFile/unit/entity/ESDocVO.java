@@ -4,9 +4,6 @@ import java.util.Map;
 
 import com.tuniu.mob.ocsfaq.common.util.TnStringUtils;
 
-/**
- * Created by libing2 on 2016/10/17.
- */
 public class ESDocVO {
     private int schemaId;
     private String docId;
