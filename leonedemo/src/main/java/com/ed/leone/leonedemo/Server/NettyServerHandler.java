@@ -39,6 +39,7 @@ public class NettyServerHandler  extends ChannelInboundHandlerAdapter {
         //获取连接通道唯一标识
         ChannelId channelId = ctx.channel().id();
 
+
         System.out.println();
         //如果map中不包含此连接，就保存连接
         if (CHANNEL_MAP.containsKey(channelId)) {
