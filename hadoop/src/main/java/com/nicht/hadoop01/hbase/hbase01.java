@@ -4,11 +4,15 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.NamespaceDescriptor;
 import org.apache.hadoop.hbase.NamespaceExistException;
+import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
+import org.apache.hadoop.hbase.security.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
+
 /**
  * @Description ddl operate
  * @Date 2023/8/8
@@ -21,8 +25,13 @@ public class hbase01 {
        boolean rs = false;
         try {
             Configuration configuration = HBaseConfiguration.create();
-            configuration.set("hbase.zookeeper.quorum", "82.156.165.91,101.43.154.160,120.26.11.94");
+            configuration.set("hbase.zookeeper.quorum", "82.156.165.91:2181,101.43.154.160:2181,120.26.11.94:2181");
             Connection connection = ConnectionFactory.createConnection(configuration);
+
+             Admin admin =   connection.getAdmin();
+
+            System.out.println(  admin.listTableNames() );
+
             NamespaceDescriptor namespace =  NamespaceDescriptor.create(nameSpace).build();
             connection.getAdmin().createNamespace(namespace);
             connection.getAdmin().close();

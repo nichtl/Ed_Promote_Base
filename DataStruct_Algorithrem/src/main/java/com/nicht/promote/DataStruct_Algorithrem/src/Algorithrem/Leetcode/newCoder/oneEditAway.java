@@ -50,6 +50,7 @@ public class oneEditAway {
         if(n>m){ return  oneEditAway(second,first); }
 
         int i =0,j=0,diff_num = 0;
+
         while(i<n && j<m && diff_num <=1){
             char c1 = first.charAt(i);
             char c2 = second.charAt(j);
@@ -57,13 +58,12 @@ public class oneEditAway {
             if(c1  == c2 ){
                 i++; j++;
             }else{
-                // 相同位置不同 也需要 i++ ; j++
-                if( (c1 != c2 )&& (n == m)){
-                    i++ ; j++;  diff_num++;
-                }else {
-                    j++;
-                    diff_num++;
+                // 相同位置 不同 也需要 i++ ; j++
+                if( (c1 != c2 ) && (n == m) ){
+                    i++ ;
                 }
+                j++;
+                diff_num++;
             }
 
 
