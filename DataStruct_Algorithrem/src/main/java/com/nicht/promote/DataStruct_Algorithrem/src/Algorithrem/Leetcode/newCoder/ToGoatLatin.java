@@ -65,11 +65,14 @@ import java.util.Map;
 // sentence 不含前导或尾随空格
 // sentence 中的所有单词由单个空格分隔
 public class ToGoatLatin {
+
+
     public static void main(String[] args) {
         List<String> list =  Lists.newArrayList("a","e","i","o","u");
         String sentence = "The quick brown fox jumped over the lazy dog";
         System.out.println(toGoatLatin(sentence));
     }
+
     public static  String toGoatLatin(String sentence) {
         Map<String,Boolean> map = new HashMap<>();
         map.put("a",true); map.put("e",true); map.put("i",true); map.put("o",true);
