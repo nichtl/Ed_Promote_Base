@@ -24,7 +24,7 @@ public class HiveSQL {
     /**
      * create table gulivideo_user(
      *  uploader string,
-     *  videos int,
+     *  videos int,o
      *  friends int)
      * row format delimited
      * fields terminated by "\t";
@@ -48,7 +48,8 @@ public class HiveSQL {
      *     select  videoid , categoryName from (
      *         select videoid,views,category
      *              from gulivideo_ori
-     *              order by views desc
+     *              order by views
+     *              desc
      *              limit 20
      *      )t1  lateral view explode(category) gulivideo_orc_tmp as  categoryName
      *     )t2
@@ -115,7 +116,7 @@ public class HiveSQL {
      * u03	2017/1/22	8
      * u04	2017/1/20	3
      * u01	2017/1/23	6
-     * u01	2017/2/21	8
+     * u01	2017/2/`21	8
      * U02	2017/1/23	6
      * U01	2017/2/22	4
      *
@@ -198,11 +199,30 @@ public class HiveSQL {
 
     /**
      * 3、按照每个人领取的沙柳棵数进行倒序排序,并获取当前记录的下一条记录所领取的沙柳的棵数
+     *    select user_id , plant_count, lead(plant_count,1,'0') over (order by plant_count desc  ) next_count  from
+     *
+     *    (select user_id,(a1.sum_low_carbon)/a3.low_carbon as plant_count from
+     *        (select user_id,sum(low_carbon) as sum_low_carbon
+     *         from user_low_carbon
+     *          where data_dt < '2017/10/1'
+     *       group by user_id
+     *       order by sum_low_carbon desc) a1,
+     *       (select low_carbon from plant_carbon where plant_id = 'p004') a2,
+     *       (select low_carbon from plant_carbon where plant_id = 'p002') a3) a4
+     *
+     *
+     *
+     *
+     *
      */
 
 
     /**
      * 4、将每一条记录对应的用户领取的沙柳棵数和排在他下面的用户领取的棵数，进行相减，就是当前用户比他后一名所多的棵数
+     *
+     *
+     *
+     *
      */
 
     /**
@@ -234,9 +254,13 @@ public class HiveSQL {
      * 业务域: crm 会员业务 tof 订单业务 mob 在线客服 供应链
      */
 
+
+
+
 /**
+ * rowkey的规则 前两位会员id64 取模  后10位会员id前补0
  *  负责业务:crm会员业务域相关系统,mob无线业务域,负责无线底层im系统开发维护.
- *  项目技术: Spring、SpringMVC、Spring Boot、iBatis、MyBatis、RPC 、Thrift、RabbitMQ、Redis 、Hadoop 、Hive、Hbase
+ *  项目技术: Spring、SpringMVC、Spring Boot、iBatis、MyBatis、Thrift、Zookeeper 、MQ、Redis 、Hadoop 、Hive、Hbase
  *  责任描述:
  *  负责CRM会员检索维护优化,CRM会员检索基于crm大数据平台实现,
  *  由业务人员在页面选取取数条件,异步执行hql任务落库数据,由于crm取数维度不断拓展导致hql越发大且杂,
@@ -244,8 +268,9 @@ public class HiveSQL {
  *  负责crm机器人外呼相关业务维护,实现从创建外呼任务管理到外呼后根据对话意图分发人工任务项,自动添加企微等流程串联,
  *  长期参与crm自动化场景开发,对接业务及BI,实现业务营销场景多渠道推送,参与crm场景营销渠道统一改造,对接决策中心,实现crm营销业务收口及管控,
  *  参与订单让价改造及额度管理相关功能开发,负责让价金额计算,
- *  负责在线客服维护迭代,负责在线客服FAQ后台管理页面及功能重构,独立搭建动态FAQ回答功能,使得FAQ答案可配置内部业务接口,实现FAQ答案灵活对接内部业务信息.
+ *  负责在线客服维护迭代,负责在线客服FAQ后台管理页面及功能重构,独立搭建im机器人及Faq动态应答功能,使得FAQ自由配置内部业务接口,实现FAQ答案灵活对接内部业务信息.
  *  对接百度机器人,实现机器人对话,负责在线客服对接公司内部基于rasa chatGpt 实现的对话机器人,接入im对话流程.实现智能客服应答。
+ *
  *
  * **/
 

@@ -144,6 +144,7 @@ public  class DynamicFaqServiceImpl  implements IDynamicFaqService  {
                 if( dynamicContentNode == null ){
                     throw  new FAQException(" dynamicContentNode textNode  is empty   content= "+content+"param="+JSON.toJSONString(param));
                 }
+                // ids 逗号分割
                 List<String>  finalOutParamIds = StringUtils.strToString2List(dynamic_outparam_ids);
                 String finalOutParamId = finalOutParamIds.get(finalOutParamIds.size()-1);;
                 FaqDynamicParameter parameter =  paramterService.selectDynamicParameterById(Integer.parseInt(finalOutParamId));

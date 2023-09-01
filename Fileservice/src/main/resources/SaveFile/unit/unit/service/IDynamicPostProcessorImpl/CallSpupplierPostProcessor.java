@@ -36,7 +36,7 @@ public class CallSpupplierPostProcessor implements IDynamicPostProcessor {
 
     public   final  static  String Supply_post="#{供应商分机电话.data.售后.电话号码}";
 
-    private  final  static  String TOF_QUERY_SALER_INFO_URL = "http://public-api.tof.tuniu.org/tof/api/query/saler/querySalerById?";
+    private  final  static  String TOF_QUERY_SALER_INFO_URL = "http://tuniu.org/querySalerById?";
 
 //    @Autowired
 //    private TspClient tspClient;
