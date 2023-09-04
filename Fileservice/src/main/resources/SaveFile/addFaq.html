@@ -1,25 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <title>新增问答对</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- 本地测试-->
-    <#--    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-    <#--    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>-->
-    <#--    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"/></script>-->
-    <#--    <script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
-    <#--    <script type="text/javascript" src="/muses-web-site/js/tinymce/icons/default/icons.min.js"></script>-->
-    <#--    <script type="text/javascript" src="/muses-web-site/js/tinymce/tinymce.min.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/tinymce/5.10.0/tinymce.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/tinymce/5.10.0/jquery.tinymce.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/tinymce/5.10.0/icons/default/icons.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"/></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 
 
     <!-- 发布环境 -->
-    <script type="text/javascript" src="/muses-web-site/js/lib/vue2.6.12.min.js"></script>
-    <script type="text/javascript" src="/muses-web-site/js/faq/element_2.15.9_index.js"></script>
-    <script type="text/javascript" src="/muses-web-site/js/tinymce/tinymce.min.js"></script>
-    <script type="text/javascript" src="/muses-web-site/js/tinymce/icons/default/icons.min.js"></script>
-    <link rel="stylesheet" href="/muses-web-site/js/faq/element_2.15.9_index.css"/>
-    <script type="text/javascript" src="/muses-web-site/js/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/script/lib/jquery.min.js"></script>
+
     <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <meta name="_csrf" content="3a0c4c66-7d59-4ee1-b21c-39766a476012"/>
@@ -55,7 +51,6 @@
                 // 动态生成 input 元素，加入到 form 之后
                 var e = document.createElement("input");
                 e.name = "_csrf";
-                <#--e.value = "${_csrf.token}";-->
                 e.value = "3a0c4c66-7d59-4ee1-b21c-39766a476012";
                 e.type="hidden";
                 forms[i].appendChild(e);
