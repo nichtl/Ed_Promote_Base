@@ -670,6 +670,7 @@ public class AllDemo {
         return dp[nums.length - 1];
     }
 
+
     public int uniquePaths(int m, int n) {
         int[][] path = new int[m][n];
         for (int i = 0; i < m; i++) {
@@ -1402,10 +1403,12 @@ public class AllDemo {
     public static void reTree(TreeNode treeNode){
         if(treeNode==null) return;
 
+
+        reTree(treeNode.left);
         if( treeNode.left!=null&& treeNode.left.val> treeNode.val){
-               int tmp = treeNode.left.val;
-             treeNode.left.val = treeNode.val;
-             treeNode.val = tmp;
+            int tmp = treeNode.left.val;
+            treeNode.left.val = treeNode.val;
+            treeNode.val = tmp;
         }
 
         if(treeNode.right!=null&& treeNode.right.val< treeNode.val){
@@ -1413,7 +1416,6 @@ public class AllDemo {
             treeNode.right.val = treeNode.val;
             treeNode.val = tmp;
         }
-        reTree(treeNode.left);
         reTree(treeNode.right);
     }
 

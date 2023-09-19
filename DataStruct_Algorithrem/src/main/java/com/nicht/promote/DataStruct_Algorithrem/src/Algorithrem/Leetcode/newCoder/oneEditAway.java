@@ -1,5 +1,7 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCoder;
 
+import cn.hutool.core.util.StrUtil;
+
 /**
  * @Description
  * //字符串有三种编辑操作:插入一个英文字符、删除一个英文字符或者替换一个英文字符。 给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。
@@ -52,13 +54,14 @@ public class oneEditAway {
         int i =0,j=0,diff_num = 0;
 
         while(i<n && j<m && diff_num <=1){
+
             char c1 = first.charAt(i);
             char c2 = second.charAt(j);
 
             if(c1  == c2 ){
                 i++; j++;
             }else{
-                // 相同位置 不同 也需要 i++ ; j++
+                // 长度相同时
                 if( (c1 != c2 ) && (n == m) ){
                     i++ ;
                 }
@@ -71,4 +74,8 @@ public class oneEditAway {
 
         return diff_num <=1 ;
     }
+
+
+
+
 }
