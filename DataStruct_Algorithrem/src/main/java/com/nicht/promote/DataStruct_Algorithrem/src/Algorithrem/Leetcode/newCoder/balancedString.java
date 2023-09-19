@@ -1,5 +1,7 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCoder;
 
+import java.util.concurrent.Callable;
+
 //有一个只含有 'Q', 'W', 'E', 'R' 四种字符，且长度为 n 的字符串。
 //
 // 假如在该字符串中，这四个字符都恰好出现 n/4 次，那么它就是一个「平衡字符串」。
@@ -67,7 +69,7 @@ public class balancedString {
      minimumRecolors("WBBWWBBWBW",7);
 
     }
-
+    //2379
     public static int minimumRecolors(String blocks, int k) {
         int cnt = 0;
         for (int i = 0; i < k; ++i) {
@@ -91,5 +93,13 @@ public class balancedString {
 //    }
 
 
+
+    public  class  Task implements Callable{
+
+        @Override
+        public Object call() throws Exception {
+            return null;
+        }
+    }
 
 }

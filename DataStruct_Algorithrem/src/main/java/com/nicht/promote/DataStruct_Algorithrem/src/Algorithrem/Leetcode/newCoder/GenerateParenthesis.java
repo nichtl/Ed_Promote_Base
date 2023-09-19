@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 功能描述：
@@ -38,13 +39,26 @@ import java.util.Map;
 // Related Topics 字符串 动态规划 回溯 👍 2621 👎 0
 
 public class GenerateParenthesis {
-    // 右括号一定要比右括号先使用完
+
+    public  List<String>  generateParenthesis2(int n){
+        // 括号生成
+        HashMap  map = new HashMap();
+          map.put(null,"");
+
+        ConcurrentHashMap<String,Object> hashMap = new ConcurrentHashMap<String,Object>();
+          hashMap.keys();
+
+          hashMap.put(null,"");
+
+
+
+
+     return  null;
+    }
+
+    // 左括号一定要比右括号先使用完
     public List<String> generateParenthesis(int n) {
 
-        Map<Integer, Integer> countMap = new HashMap<Integer, Integer>();
-        for (Map.Entry<Integer,Integer> e : countMap.entrySet()){
-            int count =   e.getValue();
-        }
 
         List<String> result = new ArrayList<String>();
         dfs(result,"",n,0,0);

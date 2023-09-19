@@ -1,6 +1,8 @@
 package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 功能描述：
@@ -50,8 +52,20 @@ public class WiggleSort {
         int  mid = nums.length/2;
         int [] numsLeft =  Arrays.copyOfRange(nums,0,mid+1);
         int [] numsRight = Arrays.copyOfRange(nums,mid+1,nums.length);
-        wiggleSort(nums);
+       boolean r =  confusingNumber(6);
+        System.out.println(r);
+        //wiggleSort(nums);
     }
+
+
+    public  static  void wiggleSort2(int[] nums) {
+        Arrays.sort(nums);
+
+        for (int i = 1; i < nums.length-1; i+=2) {
+            swap(nums,i,i+1);
+        }
+    }
+
 
     public static void wiggleSort(int[] nums) {
         int i=0,j=0;
@@ -70,13 +84,37 @@ public class WiggleSort {
     }
 
 
-    public  void swap(int[] nums ,int i,int j){
+    public  static void swap(int[] nums ,int i,int j){
         nums[i]^=nums[j];
         nums[j]^=nums[i];
         nums[i]^=nums[j];
     }
 
 
+    public static boolean confusingNumber(int n) {
+        Map<Character,Character> illegalNumMap = new HashMap<>();
+           illegalNumMap.put('0', '0');
+           illegalNumMap.put('1', '1');
+           illegalNumMap.put('6', '9');
+           illegalNumMap.put('8', '8');
+           illegalNumMap.put('9', '6');
+
+           String r = String.valueOf(n);
+        for (int i = 0; i < r.length(); i++) {
+             if(r.charAt(i) !='0' && r.charAt(i)!='1' && r.charAt(i)!='6' && r.charAt(i)!='8' && r.charAt(i)!='9'){return false;}
+        }
+
+           StringBuilder s = new StringBuilder();
+        for (int i = r.length()-1; i >=0 ; i--) {
+            s.append(illegalNumMap.get(r.charAt(i)));
+        }
+
+        return !r.equals(s.toString());
+
+
+
+
+    }
 
 
     
