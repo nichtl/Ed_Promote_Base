@@ -81,7 +81,6 @@ public class   AQS {
         //
                        //进入这个分支，ws只能是0或PROPAGATE。
                       //CAS设置ws为SIGNAL
-         //
         //             * waitStatus must be 0 or PROPAGATE.  Indicate that we
         //             * need a signal, but don't park yet.  Caller will need to
         //             * retry to make sure it cannot acquire before parking.
