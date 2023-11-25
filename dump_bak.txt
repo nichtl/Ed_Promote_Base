@@ -1,3 +1,202 @@
 现象
   会员及订单数据同步服务 经常挂掉 数据无法及时同步
   但是api接口调用是正常的,手动触发推送也可以推送
+
+
+  Linux
+  js/TNWebIm.js,jsrc/piwikParse.js,jsrc/todoTask.js,jsrc/openWin.js,jsrc/contractRenewRemind.js,jsrc/bundle.js
+
+  http://git.tuniu.org/git/qianhongwei/lvrsvr.git
+
+
+  老年人接待标准：
+  出游人年龄超过  #{特殊人群限制.data.resInfo.specialPeople.特殊人群限制.出游人不接收年龄上限} （含），不接收；
+  出游人年龄超过    #{特殊人群限制.data.resInfo.specialPeople.特殊人群限制.出游需签订健康协议年龄} （含），需签订健康协议；
+  /salerstatus/querysalerstatus/{agent_id}
+
+
+  * （1）其节点要么是红色，要么是黑色
+  * （2）根节点是黑色的
+  * （3）每个叶子节点都是黑色的空节点（用 NULL 表示）
+  * （4）红色节点的两个子节点均为黑色的
+  * （5）从任意节点到其每个叶子的所有路径都包含相同的黑色节点
+
+
+
+  nohup hive --service hiveserver2 > hiveserver2.out    2>&1 &
+  nohup hive --service metastore   > metastore.out   2>&1 &
+
+  Hive-37
+
+
+
+
+
+  songsong,
+
+  create  table if not exists employee(
+                 name string,
+                 salary double,
+                 salerry_detail array<string>,
+                 deduce map<string,float>,
+                 address struct<street:string,city:string,state:string,zip:int>
+                 ) row format delimited
+                 fields terminated by ' '
+                 collection items terminated by '_'
+                 map keys terminated by ':'
+                 lines terminated by '\n'
+                 stored as textfile;
+
+
+   //  max score   min score   group   by  name
+   select name,course, cscore
+   from (
+     select  name ,
+     course,
+     cscore ,
+     rank() over(partition by name  order by cscore) as min_rank,
+     rank() over(partition by name order by cscore desc) as max_rank
+     from stu_score_test
+     lateral view explode(score)    score_view as course,cscore
+  ) aa
+  where aa.min_rank =1 and aa.max_rank=1
+
+  //
+
+
+
+
+组件部署分布情况
+Hadoop-tx-82  resourcemanager nodemanager datanode jobhistory
+Hadoop-tx-101 namenode   nodemanage datanode
+Hadoop-aliyun-120 sencondarynamenoder nodemanage datanode
+
+交换 82  为 yarn resourcemanager
+
+        120 为 secondarynamenode
+
+         101 为 namenode
+
+
+
+
+
+
+
+ <!-- 指定MapReduce程序运行在Yarn上 -->
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+        <!-- 历史服务器端地址 -->
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>yangdarun01:10020</value>
+    </property>
+
+        <!-- 历史服务器web端地址 -->
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>yangdarun01:19888</value>
+</property>
+
+hdfs --daemon start namenode
+hdfs --daemon start datanode
+yarn  --daemon start nodemanager
+
+
+hdfs --daemon start secondarynamenode
+hdfs --daemon start datanode
+yarn  --daemon start nodemanager
+
+hadoop
+Java	jdk1.8.0_111
+Scala	scala-2.12.1
+zookeeper、	zookeeper-3.4.6
+hdfs、	hadoop-2.7.3
+yarn、	hadoop-2.7.3
+hbase、	hbase-1.2.4
+phoenix、	phoenix-4.9.0-HBase-1.2
+hive、	hive-1.2.1
+presto、	presto-server-0.158
+sqoop、	sqoop-1.4.6
+ETL	pdi-ce-6.0.1.0-386	Data Integration - Kettle
+mapReduce、	hadoop-2.7.3
+tez、
+spark、	spark-2.0.2- hadoop2.7
+flume、
+kafka、
+kafka manager、
+jstorm、	jstorm-2.1.1
+azkaban、	azkaban-3.12.0
+ganglia、	ganglia- 3.7.2
+nagios、
+hue、
+
+
+nebula
+
+
+tps 110
+
+qps 1364
+
+iops 1000-1500
+
+show tables
+
+show status like '%sync%';
+
+
+SHOW GLOBAL STATUS LIKE 'Com_commit';
+序号	Variable_name	Value
+1	Com_commit	19270936484
+
+SHOW GLOBAL STATUS LIKE 'Com_rollback';
+
+序号	Variable_name	Value
+1	Com_rollback	4757092
+
+
+
+SHOW GLOBAL STATUS LIKE 'Uptime'
+
+
+序号	Variable_name	Value
+1	Uptime	175749489
+
+select (19270936484 + 4757092 )/175749489   tps 110
+
+
+
+SHOW GLOBAL STATUS LIKE 'Questions'
+序号	Variable_name	Value
+1	Questions	239791199578
+
+select   239791199578/175749489       qps 1364
+
+
+iops. 1000 - 1500 之间
+
+
+
+Vue veux vue-router vue-cli
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
