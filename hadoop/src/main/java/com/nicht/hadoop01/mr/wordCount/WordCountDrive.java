@@ -34,8 +34,8 @@ public class WordCountDrive  {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
     
-        FileInputFormat.setInputPaths(job, new Path("/Users/xujian8/Downloads/mypa.txt"));
-        FileOutputFormat.setOutputPath(job, new Path("/Users/xujian8/Downloads/wordresults1"));
+        FileInputFormat.setInputPaths(job, new Path("/Downloads/mypa.txt"));
+        FileOutputFormat.setOutputPath(job, new Path("Downloads/wordresults1"));
         job.waitForCompletion(true);
 
 

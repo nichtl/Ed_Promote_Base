@@ -139,7 +139,7 @@ public class ByteUtils {
         }
 
         /**图片到byte数组*/
-        public static byte[] image2byte(String path){
+       public static byte[] image2byte(String path){
         byte[] data = null;
         FileImageInputStream input = null;
         try {

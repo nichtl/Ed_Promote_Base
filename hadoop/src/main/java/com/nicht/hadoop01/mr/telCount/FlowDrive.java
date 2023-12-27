@@ -33,8 +33,8 @@ public class FlowDrive {
         job.setOutputValueClass(FlowBean.class);
 
 
-        FileInputFormat.setInputPaths(job,new Path("/Users/xujian8/Downloads/flow.txt"));
-        FileOutputFormat.setOutputPath(job,new Path("/Users/xujian8/Downloads/flowcount1"));
+        FileInputFormat.setInputPaths(job,new Path("Downloads/flow.txt"));
+        FileOutputFormat.setOutputPath(job,new Path("Downloads/flowcount1"));
         // 提交
         job.waitForCompletion(true);
 
