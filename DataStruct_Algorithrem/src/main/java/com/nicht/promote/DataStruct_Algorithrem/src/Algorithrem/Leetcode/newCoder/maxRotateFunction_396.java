@@ -90,8 +90,6 @@ public class maxRotateFunction_396 {
              f = f+sum-( n* nums[n-i]);
              result = Math.max(f,result);
         }
-
         return  result;
-
     }
 }
