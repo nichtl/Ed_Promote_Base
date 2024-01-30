@@ -23,7 +23,7 @@ public class NQueue_51 {
  * 输入：n = 1
  * 输出：[["Q"]]
  * */
-store
+
 
         public static void main(String[] args) {
             char[][] chessBoard = new char[][]{
