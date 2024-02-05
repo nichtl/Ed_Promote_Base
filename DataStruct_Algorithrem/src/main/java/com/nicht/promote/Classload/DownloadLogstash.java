@@ -32,7 +32,7 @@ public class DownloadLogstash {
 
         String logDate="2023-12-06";
 
-        String savePath = "/Users/xujian8/Downloads/"+tomcatBase;
+        String savePath = "/Users/Downloads/"+tomcatBase;
 
 //        LocalDate starDate = LocalDate.parse("2023-06-20");
 //        LocalDate endDate = LocalDate.parse("2023-06-29");
