@@ -24,7 +24,6 @@ import java.util.List;
 @Component
 public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
-    @Override
     protected void messageReceived(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket)
             throws Exception {
         InetSocketAddress sender = datagramPacket.sender();
@@ -56,6 +55,11 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         super.channelRead(ctx, msg);
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) throws Exception {
+         this.messageReceived(channelHandlerContext,datagramPacket);
     }
 
 

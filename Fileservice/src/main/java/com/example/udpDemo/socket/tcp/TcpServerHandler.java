@@ -24,7 +24,6 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
      * @param msg 消息
      * @throws Exception 异常
      */
-    @Override
     protected void messageReceived(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
         try {
             // 由于从串口服务器上传的数据，都是按照16进制的数据进行上传，所以在这里需要进行数据转换
@@ -63,6 +62,11 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         log.info("串口服务器：IP:{}，下线了", getClientIp(ctx));
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
+        this.messageReceived(channelHandlerContext,byteBuf);
     }
 
     /**
