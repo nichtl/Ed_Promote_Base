@@ -34,7 +34,7 @@ package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem.Leetcode.newCod
 //解释：第二个玩家可以选择值为 2 的节点。
 //
 // 示例 2 ：
-//
+// 分配
 //
 //输入：root = [1,2,3], n = 3, x = 1
 //输出：false
@@ -74,5 +74,5 @@ public class btreeGameWinningMove {
           this.left = left;
           this.right = right;
       }
-  }
+   }
 }

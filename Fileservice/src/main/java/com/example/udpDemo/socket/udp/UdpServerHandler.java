@@ -8,7 +8,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
@@ -111,7 +110,7 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 //            return;
 //        }
 
-        List<NettyPacket> nettyPackets = new ArrayList<>();//需要发送的数据
+        List<NettyPacket> nettyPackets = new ArrayList();//需要发送的数据
 
         int keyNo = Integer.parseInt(String.valueOf(keyByte), 16);
         if (1 == keyNo) {

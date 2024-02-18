@@ -1,4 +1,4 @@
-//package com.example.udpDemo;
+package com.example.udpDemo;//package com.example.udpDemo;
 //
 //import lombok.extern.slf4j.Slf4j;
 //import org.jeecg.modules.gateway.modules.entity.GatewayParam;

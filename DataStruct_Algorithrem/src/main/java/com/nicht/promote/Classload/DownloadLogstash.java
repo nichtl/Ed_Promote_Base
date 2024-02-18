@@ -30,7 +30,7 @@ public class DownloadLogstash {
         //String tomcatBase = "qms-qms-prd";
         // String tomcatBase = "tof-ord-prd1";
 
-        String logDate="2023-12-06";
+        String logDate="2023-12-07";
 
         String savePath = "/Users/Downloads/"+tomcatBase;
 
