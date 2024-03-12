@@ -51,13 +51,13 @@ public class SetZero {
 
          int m = matrix.length; //row len
          int n = matrix[0].length;// col len
-       // 首列
+       // 首行
         for (int i = 0; i < m; i++) {
             if(matrix[i][0] == 0){
                 row = true; break;
             }
         }
-        //首行
+        //首列
         for (int j = 0; j < n; j++) {
             if(matrix[0][j] == 0){
                 col = true; break;
@@ -91,12 +91,12 @@ public class SetZero {
         }
 
 
-        if(row){
+        if(col){
             for(int i=0;i < m; i++){
                 matrix[i][0] =0;
             }
         }
-        if(col){
+        if(row){
             Arrays.fill(matrix[0],0);
         }
 
