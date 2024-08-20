@@ -42,6 +42,5 @@ public class numWays_276 {
              dp2 = res;
         }
         return  res;
-        
     }
 }
