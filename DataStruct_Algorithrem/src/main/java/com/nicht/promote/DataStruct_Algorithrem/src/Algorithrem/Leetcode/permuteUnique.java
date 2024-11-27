@@ -54,7 +54,7 @@ public class permuteUnique {
              return;
          }
        for (int i = 0; i < nums.length; i++) {
-            if(visit[i]    ){
+            if(visit[i]){
                 continue;
             }
             visit[i] = true;

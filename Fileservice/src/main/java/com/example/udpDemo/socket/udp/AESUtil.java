@@ -24,15 +24,10 @@ import java.util.Arrays;
 
 @Slf4j
 public class AESUtil    {
-
-
-
     /**
      * 输出大写的16进制密文字符串
-     *
      * @param key     密钥
      * @param content 加密内容
-     * @return
      * @auther sjt Administrator
      * @since 2023/12/3 20:05
      */

@@ -3,6 +3,7 @@ package com.nicht.promote.DataStruct_Algorithrem.src.Algorithrem;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Author Nicht
@@ -12,24 +13,31 @@ import java.util.*;
  */
 public class binarySearch {
     public static void main(String[] args) {
-
-        int[][] matrix  = new int[][]{
-                {1,4,7,11,15},
-                {2,5,8,12,19},
-                {3,6,9,16,22},
-                {10,13,14,17,24},
-                {18,21,23,26,30}};
-        int[][] nums = new int[][]{{-5}};
-        System.out.println(searchMatrix(nums,5));
+        int olddt = 3;
+        int newdt = olddt +1;
+        int oldhash = 5;
+        int newhash = (1<<olddt) | oldhash;
+        System.out.println(Integer.toBinaryString(oldhash));
+        System.out.println(Integer.toBinaryString(newhash));
 
 
-
-        Date now = new Date();
-        System.out.println("当前日期：" + DATE_FORMAT.format(now));
-        Date newDate = stepMonth(now, -9);
-        System.out.println("当前时间前13个月的日期：" + DATE_FORMAT.format(newDate));
-        String  s  = "2012-10-01";
-        System.out.println();
+//        int[][] matrix  = new int[][]{
+//                {1,4,7,11,15},
+//                {2,5,8,12,19},
+//                {3,6,9,16,22},
+//                {10,13,14,17,24},
+//                {18,21,23,26,30}};
+//        int[][] nums = new int[][]{{-5}};
+//        System.out.println(searchMatrix(nums,5));
+//
+//
+//
+//        Date now = new Date();
+//        System.out.println("当前日期：" + DATE_FORMAT.format(now));
+//        Date newDate = stepMonth(now, -9);
+//        System.out.println("当前时间前13个月的日期：" + DATE_FORMAT.format(newDate));
+//        String  s  = "2012-10-01";
+//        System.out.println();
         //int[] nums = new int[]{-5};
 
         //System.out.println(search(nums,5));
@@ -49,7 +57,6 @@ public class binarySearch {
         Calendar c = Calendar.getInstance();
         c.setTime(sourceDate);
         c.add(Calendar.MONTH, month);
-
         return c.getTime();
     }
     public static  int search(int[] nums, int target) {
