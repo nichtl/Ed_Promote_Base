@@ -14,6 +14,18 @@ public class permute_46 {
         return result;
     }
 
+    public boolean canJump(int[] nums) {
+        int end = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (end >= nums.length - 1) {
+                return true;
+            }
+            end = Math.max(end, i + nums[i]);
+        }
+        return false;
+    }
+
 
     public void dfs(int[] nums, List<Integer> path, List<List<Integer>> result) {
         if (path.size() == nums.length) {

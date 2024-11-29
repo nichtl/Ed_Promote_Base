@@ -25,16 +25,10 @@ import java.util.Map;
  */
 public class cut {
 
-
     public static void main(String[] args) {
-
-
-
-
         String path = "/Users/xujian8/IdeaProjects/wx2/Ed_Promote_Base/DataStruct_Algorithrem/src/main/java/com/nicht/promote/DataStruct_Algorithrem/src/Algorithrem/Leetcode/novel/Cii9D1Z-H0-IRyuWAAAhln0WnxoAABXwwP4bswAACGu60.xlsx";
 
         String url = "http://crm.tuniu-sit.org/nebula-app/benefitActivity/ajaxImportCustByExcelFile.htm?fileMode=1";
-
 
         Map<String , Object>  formData = new HashMap<String , Object>();
 

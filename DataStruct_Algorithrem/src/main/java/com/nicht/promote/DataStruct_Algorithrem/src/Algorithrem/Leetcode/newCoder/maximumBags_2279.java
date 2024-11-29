@@ -14,7 +14,6 @@ public class maximumBags_2279 {
         for (int i = 0; i < rocks.length; i++) {
             capacity[i] = capacity[i] - rocks[i];
         }
-
         Arrays.sort(capacity);
         for (int i = 0; i < capacity.length ; i++) {
             if(capacity[i] <= additionalRocks){

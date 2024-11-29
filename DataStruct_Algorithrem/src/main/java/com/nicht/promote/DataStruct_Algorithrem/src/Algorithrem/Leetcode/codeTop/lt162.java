@@ -36,7 +36,7 @@ public class lt162 {
                 right = mid;
             }
             if(nums[left] < nums[mid]){
-                left = mid+1;
+                left = mid + 1;
             }else {
                 right = mid;
             }
