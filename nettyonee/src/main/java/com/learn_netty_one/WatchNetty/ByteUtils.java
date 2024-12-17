@@ -10,19 +10,27 @@ import java.math.BigInteger;
  * @ 2021/3/30
  */
 public class ByteUtils {
+    /**
+     * 用于建立十六进制字符的输出的小写字符数组
+     */
+    private static final char[] DIGITS_LOWER = {'0', '1', '2', '3', '4', '5',
+            '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
     public static void main(String[] args) {
         System.out.println(toStringHex2("1129004F8CED4211F1FF410000C842000000001504010E331800000400A8FF04344701A10E5EFF270000FF00"));
     }
+
     /*@Description
      * byte字节转16进制字符
      * */
-    public static String byteToArray(byte[]data){
-        String result="";
+    public static String byteToArray(byte[] data) {
+        String result = "";
         for (int i = 0; i < data.length; i++) {
-            result+=Integer.toHexString((data[i] & 0xFF) | 0x100).toUpperCase().substring(1, 3);
+            result += Integer.toHexString((data[i] & 0xFF) | 0x100).toUpperCase().substring(1, 3);
         }
         return result;
     }
+
     protected static int toDigit(char ch, int index) {
         int digit = Character.digit(ch, 16);
         if (digit == -1) {
@@ -31,13 +39,6 @@ public class ByteUtils {
         }
         return digit;
     }
-
-    /**
-     * 用于建立十六进制字符的输出的小写字符数组
-     */
-    private static final char[] DIGITS_LOWER = { '0', '1', '2', '3', '4', '5',
-            '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-
 
     /*
      * @Description
@@ -61,28 +62,28 @@ public class ByteUtils {
 
     /**
      * 将 4字节的16进制字符串，转换为32位带符号的十进制浮点型
+     *
      * @param str 4字节 16进制字符
      * @return
      */
-    public  static  float hexToFloat(String str){
-        return  Float.intBitsToFloat(new BigInteger(str, 16).intValue());
+    public static float hexToFloat(String str) {
+        return Float.intBitsToFloat(new BigInteger(str, 16).intValue());
     }
 
     /**
      * 将带符号的32位浮点数装换为16进制
+     *
      * @param value
      * @return
      */
-    public  static  String folatToHexString(Float value){
-        return  Integer.toHexString(Float.floatToIntBits(value));
+    public static String folatToHexString(Float value) {
+        return Integer.toHexString(Float.floatToIntBits(value));
     }
 
-    public  static  float tenBitToFloat(byte[] bytes){
-        String encodehex  = HexUtil.encodeHexStr(bytes);
-        return  hexToFloat(encodehex);
+    public static float tenBitToFloat(byte[] bytes) {
+        String encodehex = HexUtil.encodeHexStr(bytes);
+        return hexToFloat(encodehex);
     }
-
-
 
 
     public static short getShort(byte[] b) {

@@ -15,6 +15,10 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * @ 2021/1/5
  */
 public class SimpleChatServer {
+    public static void main(String[] args) throws  Exception {
+     SimpleChatServer chatServer =     new SimpleChatServer(9097);
+     chatServer.run();
+    }
     private int port ;
     private OnSocketListener onSocketListener;
     public  SimpleChatServer(int port){

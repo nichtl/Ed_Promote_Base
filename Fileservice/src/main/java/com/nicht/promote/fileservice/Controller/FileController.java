@@ -17,6 +17,7 @@ import java.util.UUID;
  * @description
  * @ 2021/2/26
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/file")
 public class FileController {
@@ -25,6 +26,12 @@ public class FileController {
 
     @Autowired
     private MinioUtils minioUtils;
+
+
+    @GetMapping("test")
+    public  String testDemo(@RequestParam("channel") String channel){
+        return  channel;
+    }
 
     @PostMapping(value = "/uploadFile")
     public String uploadFile(@RequestBody MultipartFile multipartFile) {
@@ -40,18 +47,9 @@ public class FileController {
 
 
     @GetMapping(value = "/getfile")
-    public  void getFile( @RequestParam(value = "bucketname") String bucketname, @RequestParam(value = "filename") String  filename){
-        minioUtils.downloadFile(bucketname,filename,filename,((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse());
+    public void getFile(@RequestParam(value = "bucketname") String bucketname, @RequestParam(value = "filename") String filename) {
+        minioUtils.downloadFile(bucketname, filename, filename, ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse());
     }
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -56,7 +56,26 @@ public class deke1 {
         return  sum==num;
     }
 
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
 
+        return  null;
+    }
+
+
+
+    public  void  dfs(int[] candidates, int start ,int target ,List<List<Integer>> result,List<Integer> path){
+
+        if(target <0){return; }
+
+        if(target == 0 ){result.add(new ArrayList<>(path));}
+
+        for (int i = start; i < candidates.length ; i++) {
+            path.add(candidates[i] );
+            dfs(candidates, start, target-candidates[i], result, path);
+            path.remove(path.size()-1);
+        }
+
+    }
 
 
 

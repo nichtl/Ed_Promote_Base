@@ -13,7 +13,7 @@ public class reverseBetween {
       ListNode() {}
       ListNode(int val) { this.val = val; }
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-  }
+      }
 
     public ListNode reverseBetween(ListNode head, int left, int right) {
          ListNode resultNode  = new ListNode(-1);
@@ -35,11 +35,8 @@ public class reverseBetween {
 
     public ListNode reverseList(ListNode head) {
         ListNode curNode = head;
-
         ListNode  pre=null;
-
         while(curNode!=null){
-
             ListNode tmpNode = curNode.next;
             curNode.next = pre;
             pre =curNode;

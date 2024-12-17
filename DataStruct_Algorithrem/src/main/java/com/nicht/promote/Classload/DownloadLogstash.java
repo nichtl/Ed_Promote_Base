@@ -18,16 +18,38 @@ import java.util.Iterator;
  * 批量下载log
  */
 public class DownloadLogstash {
+    /**
+     * 互联网
+     * 阿里巴巴，字节跳动，京东，SHEIN，满帮，途牛，同程，扇贝，云账房，美篇，快钱，育儿网，千米网，化龙巷，福佑卡车
+     *
+     * 通信硬件
+     * 华为，中兴，荣耀，小米，OPPO，VIVO，烽火通信，中新赛克
+     *
+     * 软件＆企业服务
+     * 360，亚信，虹软，帆软，焦点科技，联创科技，浩鲸科技，地平线，厚建软件，趋势科技，润和软件，万得
+     *
+     * 芯片半导体
+       *
+     * 金融
+     * 江苏银行，南京银行，紫金农商行，华泰证券，南京证券，江苏省高投，毅达资本，江苏信托，江苏再担保，国信集团
+     *
+     * 外企
+     * 爱立信，霍尼韦尔，西门子，ABB，施耐德，菲亚特，巴斯夫，赢创，博西，福特，AO史密斯，LG
+     *
+     * 国企&研究所
+     * 国电南瑞，移动，联通，电信，中电28所，中电14所，中电55所，中电841所
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
-
         String dockerUrl = "http://logstash.tuniu.org:8000/docker/";
         String tomcatUrl = "http://logstash.tuniu.org:8000/tomcat/app/";
         String tomcatBase = "pmf-cpn-prd";
-        //String tomcatBase = "pmf-pmf-prd";
-        //String tomcatBase = "tof-ord-prdtask";
-        //String tomcatBase = "dbj-bank-prd";
-        //String tomcatBase = "bmw-bma-prd";
-        //String tomcatBase = "qms-qms-prd";
+        // String tomcatBase = "pmf-pmf-prd";
+        // String tomcatBase = "tof-ord-prdtask";
+        // String tomcatBase = "dbj-bank-prd";
+        // String tomcatBase = "bmw-bma-prd";
+        // String tomcatBase = "qms-qms-prd";
         // String tomcatBase = "tof-ord-prd1";
 
         String logDate="2023-12-07";

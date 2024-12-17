@@ -6,8 +6,6 @@ public class lt5 {
         String s ="acdebbedca";
         int i = 4;
         int j = 5;
-
-
         System.out.println(s.charAt(i));
         System.out.println(s.charAt(j));
         while (i >= 0 && j < s.length() && s.charAt(i--) == s.charAt(j++)) {
@@ -30,7 +28,9 @@ public class lt5 {
 
     public  static String expand(int i, int j, String s) {
         String res = "";
-        while (i >= 0 && j < s.length() && s.charAt(i--) == s.charAt(j++)) {
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+            i--;
+            j++;
         }
         res = s.substring(i+1, j);
         return res;

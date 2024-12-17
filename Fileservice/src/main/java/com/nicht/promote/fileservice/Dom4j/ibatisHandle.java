@@ -23,6 +23,17 @@ import java.util.List;
 public class ibatisHandle {
 
     public static void main(String[] args)  {
+
+        for (int i = 0; i < 10; i++) {
+            label97 :
+            for (int j = 0; j < 13; j++) {
+                if(j==10){
+                    break label97;
+                }
+            }
+        }
+
+
           try {
             ClassPathResource resource  = new ClassPathResource("ibatis");//原xml文件夹
             ClassPathResource resource1  = new ClassPathResource("SaveFile");//修改保存文件夹
