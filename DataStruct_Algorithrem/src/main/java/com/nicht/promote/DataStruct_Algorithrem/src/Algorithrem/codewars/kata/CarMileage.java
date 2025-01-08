@@ -35,14 +35,15 @@ public class CarMileage {
 
     public static void main(String[] args) {
 
-         List<CustDto>  a = new ArrayList<>();
-         CustDto   h  = new CustDto();
-
-         a.add(h);
-         a= a.stream().filter(t->null != t.getName()).collect(Collectors.toList());
-         List<String>  c =  new CopyOnWriteArrayList(a);
-         c.add("2");
-        System.out.println(c.toString());    }
+//         List<CustDto>  a = new ArrayList<>();
+//         CustDto   h  = new CustDto();
+//
+//         a.add(h);
+//         a= a.stream().filter(t->null != t.getName()).collect(Collectors.toList());
+//         List<String>  c =  new CopyOnWriteArrayList(a);
+//         c.add("2");
+//        System.out.println(c.toString());
+        }
     private static final int minInterestingNum = 100;
     public static int isInteresting(int number, int[] awesomePhrases) {
         if(number< minInterestingNum) {return 0;}
